@@ -1,0 +1,38 @@
+{
+  "name": "vecjs",
+  "version": "0.0.2",
+  "description": "A JavaScript 2 and 3D vector math library",
+  "main": "vec.js",
+  "scripts": {
+    "lint": "eslint --fix --ext .js .",
+    "uglify": "minify vec.js --out-file build/vec.min.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vuurvos1/vecjs.git"
+  },
+  "keywords": [
+    "vector",
+    "2d",
+    "3d",
+    "math"
+  ],
+  "author": "Sam de Kanter",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Vuurvos1/vecjs/issues"
+  },
+  "homepage": "https://github.com/Vuurvos1/vecjs#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-minify": "^0.5.1",
+    "eslint": "^7.6.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-node": "^4.1.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "uglify-js": "^3.10.1",
+    "prettier": "^2.0.5"
+  }
+}
