@@ -1,6 +1,6 @@
 {
-  "name": "vecjs",
-  "version": "0.0.2",
+  "name": "vectored",
+  "version": "0.1.0",
   "description": "A JavaScript 2 and 3D vector math library",
   "main": "vec.js",
   "scripts": {
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Vuurvos1/vecjs.git"
+    "url": "git+https://github.com/Vuurvos1/vectored.git"
   },
   "keywords": [
     "vector",
@@ -20,9 +20,9 @@
   "author": "Sam de Kanter",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Vuurvos1/vecjs/issues"
+    "url": "https://github.com/Vuurvos1/vectored/issues"
   },
-  "homepage": "https://github.com/Vuurvos1/vecjs#readme",
+  "homepage": "https://github.com/Vuurvos1/vectored#readme",
   "dependencies": {},
   "devDependencies": {
     "babel-minify": "^0.5.1",

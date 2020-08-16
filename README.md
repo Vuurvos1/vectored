@@ -7,7 +7,7 @@ A JavaScript 2 and 3D vector math library
 ### Node.js
 
 ```
-npm install vecjs --save
+npm install vectored --save
 ```
 
 ```js

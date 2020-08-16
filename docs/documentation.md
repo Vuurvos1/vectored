@@ -1,4 +1,4 @@
-# Vecjs - A 2D and 3D JavaScript library for common vector operations
+# Vectored - A 2D and 3D JavaScript library for common vector operations
 
 - Constructors
 

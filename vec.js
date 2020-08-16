@@ -20,7 +20,7 @@
 }));
 
 /**
- * # Vecjs - A JavaScript 2 and 3D vector math library
+ * # Vectored - A JavaScript 2 and 3D vector math library
  */
 
 const _pi = Math.PI;
