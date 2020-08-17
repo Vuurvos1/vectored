@@ -216,7 +216,7 @@ Vec.formObject = function(obj) {
 
 
 /**
- * Returns an object representing the vector
+ * Return an object representing the vector
  *
  * ### Examples:
  *     let vector = new Vec(10, 20);
