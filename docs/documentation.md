@@ -40,9 +40,11 @@
   - [.subtract](#subtract-vector)
   - [.multiply](#multiply-vector)
   - [.divide](#divide-vector)
+  - .remainder
 
   - [.negative](#negative)
   - [.normalize](#normalize)
+  - rotate
 
 - Products
 
@@ -50,6 +52,12 @@
   - [.magnitude](#magnitude)
   - [.lengthSq](#lengthSq)
   - [.setMag](#setMag)
+  - [.dot](#dot-product)
+  - [.cross](#cross-product)
+
+  - .distance
+  - .distanceSq
+  - .horizontalAngle
 
 # Constructors
 
@@ -542,3 +550,47 @@ vector.toObject()
 ### Return:
 
 - **Vec** New Vec instance
+
+## dot product
+
+Calculates the dot product of the vector and another
+
+### Examples:
+
+```js
+let vec1 = new Vec(100, 50)
+let vec2 = new Vec(200, 60)
+
+vec1.dot(vec2)
+// => 23000
+```
+
+### Params:
+
+- **Vec** _v_ The second vector
+
+### Return:
+
+- **Number** Dot product
+
+## cross product
+
+Calculates the cross product of the vector and another
+
+### Examples:
+
+```js
+let vec1 = new Vec(100, 50)
+let vec2 = new Vec(200, 60)
+
+vec1.dot(vec2)
+// => 17000
+```
+
+### Params:
+
+- **Vec** _v_ The second vector
+
+### Return:
+
+- **Number** Cross product

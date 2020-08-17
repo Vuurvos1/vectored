@@ -536,3 +536,39 @@ Vec.prototype.normalize = function() {
 Vec.prototype.setMag = function(n) {
   return this.normalize().multiply(n);
 };
+
+/**
+ * Calculates the dot product of the vector and another
+ *
+ * ### Examples:
+ *     let vec1 = new Vec(100, 50);
+ *     let vec2 = new Vec(200, 60);
+ *
+ *     vec1.dot(vec2);
+ *     // => 23000
+ *
+ * @param {Vector} v The second vector
+ * @return {Number} Dot product
+ * @api public
+ */
+Vec.prototype.dot = function(v) {
+  return (this.x * v.x) + (this.y * v.y) + (this.z * v.z);
+};
+
+/**
+ * Calculates the cross product of the vector and another
+ *
+ * ### Examples:
+ *     let vec1 = new Vec(100, 50);
+ *     let vec2 = new Vec(200, 60);
+ *
+ *     vec1.dot(vec2);
+ *     // => 17000
+ *
+ * @param {Vector} v The second vector
+ * @return {Number} Cross product
+ * @api public
+ */
+Vec.prototype.cross = function(v) {
+  return (this.x * v.x) - (this.y * v.y) - (this.z * v.z);
+};
