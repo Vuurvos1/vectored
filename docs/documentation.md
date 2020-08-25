@@ -8,17 +8,17 @@
   - [Vec from angle](#Vec-from-angle)
   - [Vec from angles](#Vec-from-angles)
 
-  - [.up](#-up)
-  - [.left](#-left)
-  - [.down](#-down)
-  - [.right](#-right)
-  - [.forward](#-forward)
-  - [.back](#-back)
-  - [.one](#-one)
-  - [.zero](#-zero)
+  - [.up](#up)
+  - [.left](#left)
+  - [.down](#down)
+  - [.right](#right)
+  - [.forward](#forward)
+  - [.back](#back)
+  - [.one](#one)
+  - [.zero](#zero)
 
-  - [.random2D](#-random2D)
-  - [.random3D](#-random3D)
+  - [.random2D](#random2D)
+  - [.random3D](#random3D)
 
 - Porperties
 
@@ -30,9 +30,9 @@
 
   - .copy
 
-  - [.toObject](#-toObject)
-  - [.toArray](#-toArray)
-  - [.toString](#-toString)
+  - [.toObject](#toObject)
+  - [.toArray](#toArray)
+  - [.toString](#toString)
 
 - Manipulation
 
