@@ -23,13 +23,11 @@
  * # Vectored - A JavaScript 2 and 3D vector math library
  */
 
-const _pi = Math.PI;
-const twoPi = _pi * 2;
 
 /**
  * Constructor. Will also work without the `new` keyword
  *
- * ### Examples:
+ * @example
  *     let vec1 = new vec(100, 50);
  *     let vec2 = vec(42, 1337);
  *
@@ -52,7 +50,7 @@ function Vec(x, y, z) {
 /**
  * Returns a vector that faces up
  *
- * ### Examples:
+ * @example
  *     let vector = new Vec.up();
  *
  *     vector.toObject();
@@ -68,7 +66,7 @@ Vec.up = function() {
 /**
  * Returns a vector that faces left
  *
- * ### Examples:
+ * @example
  *     let vector = new Vec.left();
  *
  *     vector.toObject();
@@ -84,7 +82,7 @@ Vec.left = function() {
 /**
  * Returns a vector that faces down
  *
- * ### Examples:
+ * @example
  *     let vector = new Vec.down();
  *
  *     vector.toObject();
@@ -100,7 +98,7 @@ Vec.down = function() {
 /**
  * Returns a vector that faces right
  *
- * ### Examples:
+ * @example
  *     let vector = new Vec.right();
  *
  *     vector.toObject();
@@ -116,7 +114,7 @@ Vec.right = function() {
 /**
  * Returns a vector that faces forward
  *
- * ### Examples:
+ * @example
  *     let vector = new Vec.forward();
  *
  *     vector.toObject();
@@ -132,7 +130,7 @@ Vec.forward = function() {
 /**
  * Returns a vector that faces backwards
  *
- * ### Examples:
+ * @example
  *     let vector = new Vec.back();
  *
  *     vector.toObject();
@@ -148,7 +146,7 @@ Vec.back = function() {
 /**
  * Returns a vector containing all ones
  *
- * ### Examples:
+ * @example
  *     let vector = new Vec.one();
  *
  *     vector.toObject();
@@ -164,7 +162,7 @@ Vec.one = function() {
 /**
  * Returns a vector containing all zeros
  *
- * ### Examples:
+ * @example
  *     let vector = new Vec.up();
  *
  *     vector.toObject();
@@ -177,10 +175,14 @@ Vec.zero = function() {
   return new Vec(0, 0, 0);
 };
 
+/*
+Create vector
+*/
+
 /**
  * Create a vector from an array
  *
- * ### Examples:
+ * @example
  *     let array = [10, 20, 0]
  *     let vector = new Vec.fromArray(array);
  *
@@ -199,7 +201,7 @@ Vec.fromArray = function(arr) {
 /**
  * Turn the x, y and z components of an object into a Vector
  *
- * ### Examples:
+ * @example
  *     let vector = new Vec({x: 10, y: 20, z:3});
  *
  *     vector.toObject();
@@ -214,11 +216,10 @@ Vec.formObject = function(obj) {
   return new Vec(obj.x || 0, ojb.y || 0, obj.z || 0);
 };
 
-
 /**
  * Return an object representing the vector
  *
- * ### Examples:
+ * @example
  *     let vector = new Vec(10, 20);
  *
  *     vector.toObject();
@@ -234,7 +235,7 @@ Vec.prototype.toObject = function() {
 /**
  * Returns an array representing the vector
  *
- * ### Examples:
+ * @example
  *     let vector = new Vec(10, 20);
  *
  *     vector.toArray();
@@ -250,7 +251,7 @@ Vec.prototype.toArray = function() {
 /**
  * Returns a string representing the vector
  *
- * ### Examples:
+ * @example
  *     let vector = new Vec(10, 20);
  *
  *     vector.toObject();
@@ -263,11 +264,14 @@ Vec.prototype.toString = function() {
   return `(${this.x}, ${this.y}, ${this.z})`;
 };
 
+/*
+Basic Math
+*/
 
 /**
  * Add two vectors together
  *
- * ### Examples:
+ * @example
  *  let vec1 = new Vec(1, 5, 2);
  *  let vec2 = new Vec(8, 3, 3);
  *
@@ -290,7 +294,7 @@ Vec.prototype.add = function(v) {
 /**
  * Subtract two vectors from one another
  *
- * ### Examples:
+ * @example
  *     let vec1 = new Vec(2, 5, 3);
  *     let vec2 = new Vec(1, 3, 2);
  *
@@ -310,10 +314,13 @@ Vec.prototype.subtract = function(v) {
   }
 };
 
+// sub short for subract
+Vec.prototype.sub = Vec.prototype.subtract;
+
 /**
  * Multiply two vectors by one another
  *
- * ### Examples:
+ * @example
  *     let vec1 = new Vec(2, 8, 1);
  *     let vec2 = new Vec(4, 2, 3);
  *
@@ -333,10 +340,13 @@ Vec.prototype.multiply = function(v) {
   }
 };
 
+// mult shorthand for multiply
+Vec.prototype.mult = Vec.prototype.multiply;
+
 /**
  * Divide two vectors by one another
  *
- * ### Examples:
+ * @example
  *     let vec1 = new Vec(5, 10, 9);
  *     let vec2 = new Vec(2, 5, 3);
  *
@@ -357,9 +367,34 @@ Vec.prototype.divide = function(v) {
 };
 
 /**
+ * Remainder when dividing two vectors
+ *
+ * @example
+ *     let vec1 = new Vec(1, 3);
+ *     let vec2 = new Vec(4, 2);
+ *
+ *     vec1.remainder(vec2);
+ *     // => {x: 1, y: 1, z: 0}
+ *
+ * @param {Vector} v vector to divide by
+ * @return {Vector} Remainder of the vector
+ * @api public
+ */
+Vec.prototype.remainder = function(v) {
+  if (v instanceof Vec) {
+    return new Vec(this.x %= v.x, this.y %= v.y, this.z %= v.z);
+  } else {
+    return new Vec(this.x %= v, this.y %= v, this.z %= v);
+  }
+};
+
+// rem shorthand for remainder
+Vec.prototype.rem = Vec.prototype.remainder;
+
+/**
  * Create a vector from a 2D angle
  *
- * ### Examples:
+ * @example
  *     let vector = new Vec(1, 3);
  *
  *     vector.toObject();
@@ -380,7 +415,7 @@ Vec.fromAngle = function fromAngle(angle, length) {
 /**
  * Create a vector from a a pair of ISO spherical angles
  *
- * ### Examples:
+ * @example
  *     let vector = new Vec(1.5, 2, 5);
  *
  *     vector.toObject();
@@ -411,7 +446,7 @@ Vec.fromAngles = function(theta, phi, length) {
 /**
  * Create a new 2D vector with a random angle
  *
- * ### Examples:
+ * @example
  *     let vector = Vec.random2D;
  *
  *     vector.toObject();
@@ -427,7 +462,7 @@ Vec.random2D = function random2D() {
 /**
  * Create a new 3D vector with a random angle
  *
- * ### Examples:
+ * @example
  *     let vector = new Vec.random3D;
  *
  *     vec1.toObject();
@@ -448,7 +483,7 @@ Vec.random3D = function random3D() {
 /**
  * Get the negative of a vector
  *
- * ### Examples:
+ * @example
  *     let vector = new Vec(2, -1, 5);
  *
  *     vector.negative();
@@ -465,7 +500,7 @@ Vec.prototype.negative = function() {
 /**
  * Get the length / magnitude of a vector
  *
- * ### Examples:
+ * @example
  *     let vector = new Vec(3, 4, 0);
  *
  *     vector.length();
@@ -483,7 +518,7 @@ Vec.prototype.magnitude = Vec.prototype.length;
 /**
  * Get the squared lenght / magnitude of a Vector
  *
- * ### Examples:
+ * @example
  *     let vector = new Vec(3, 4, 0);
  *
  *     vector.lengthSq();
@@ -496,11 +531,10 @@ Vec.prototype.lengthSq = function() {
   return Math.pow(this.x, 2) + Math.pow(this.y, 2) + Math.pow(this.z, 2);
 };
 
-
 /**
  * Normalize the vector lenght to 1
  *
- * ### Examples:
+ * @example
  *     let vector = new Vec(4, 6, 5);
  *
  *     vector.normalize();
@@ -522,7 +556,7 @@ Vec.prototype.normalize = function() {
 /**
  * Set the magnitude of the vector
  *
- * ### Examples:
+ * @example
  *     let vector = new Vec(4, 6, 5);
  *
  *     vector.setMag(4);
@@ -540,7 +574,7 @@ Vec.prototype.setMag = function(n) {
 /**
  * Calculates the dot product of the vector and another
  *
- * ### Examples:
+ * @example
  *     let vec1 = new Vec(100, 50);
  *     let vec2 = new Vec(200, 60);
  *
@@ -558,7 +592,7 @@ Vec.prototype.dot = function(v) {
 /**
  * Calculates the cross product of the vector and another
  *
- * ### Examples:
+ * @example
  *     let vec1 = new Vec(100, 50);
  *     let vec2 = new Vec(200, 60);
  *
@@ -572,3 +606,137 @@ Vec.prototype.dot = function(v) {
 Vec.prototype.cross = function(v) {
   return (this.x * v.x) - (this.y * v.y) - (this.z * v.z);
 };
+
+/**
+ * Return a vector that is made from the largest components of two vectors
+ *
+ * @example
+ *     let vec1 = new Vec(100, 50);
+ *     let vec2 = new Vec(200, 60);
+ *
+ *     vec1.max(vec2);
+ *     // => {200, 60}
+ *
+ * @param {Vector} v The second vector
+ * @return {Vector} Maximum values of the 2 vectors
+ * @api public
+ */
+Vec.prototype.max = function(v) {
+  return new Vec(
+      Math.max(this.x, v.x),
+      Math.max(this.y, v.y),
+      Math.max(this.z, v.z),
+  );
+};
+
+/**
+ * Returns a vector that is made from the smallest components of two vectors
+ *
+ * @example
+ *     let vec1 = new Vec(100, 50);
+ *     let vec2 = new Vec(200, 60);
+ *
+ *     vec1.min(vec2);
+ *     // => {100, 50, 0}
+ *
+ * @param {Vector} v The second vector
+ * @return {Vector} Minimum of vector
+ * @api public
+ */
+Vec.prototype.min = function(v) {
+  return new Vec(
+      Math.min(this.x, v.x),
+      Math.min(this.y, v.y),
+      Math.min(this.z, v.z),
+  );
+};
+
+/**
+ * Rounds the vector so all values are integers
+ *
+ * @example
+ *     let vec = new Vec(5.6, 8.362, 3);
+ *
+ *     vec.round();
+ *     // => {x: 6, y: 8, z:3}
+ *
+ * @return {Vector} Rounded vector
+ * @api public
+ */
+Vec.prototype.round = function() {
+  return new Vec(
+      Math.round(this.x),
+      Math.round(this.y),
+      Math.round(this.z),
+  );
+};
+
+/**
+ * Lerp between two vectors
+ *
+ * @example
+ *     let vec1 = new Vec(1, 3);
+ *     let vec2 = new Vec(4, 2);
+ *
+ *     vec1.lerp(vec2, 0.5);
+ *     // => {x: 2.5, y: 2.5, z: 0}
+ *
+ * @param {Vector} v Other vector to lerp between
+ * @param {Number} t Value used to interpolate between a and b
+ * @return {Vector} Lerped vector
+ * @api public
+ */
+Vec.prototype.lerp = function(v, t) {
+  // a * (1-t) + b*t)
+  const i = v.multiply(t);
+  return this.multiply(1 - t).add(i);
+};
+
+/*
+transform vector
+*/
+
+/**
+ * Set the angle of a 2D vector
+ *
+ * @example
+ *     let vec = new Vec(100, 0);
+ *
+ *     vec.rotateTo2D(-Math.PI);
+ *     // => {x: -100, y: 0, z: 0}
+ *
+ * @param {Number} rad Radians to set vector to
+ * @return {Vector} Rotated vector
+ * @api public
+ */
+Vec.prototype.rotateTo2D = function(rad) {
+  this.x = (this.x * Math.cos(rad)) - (this.y * Math.sin(rad));
+  this.y = (this.x * Math.sin(rad)) + (this.y * Math.cos(rad));
+  return this;
+};
+
+/**
+ * Rotate 2D vector by certain angle
+ *
+ * @example
+ *     let vec = new Vec(100, 0);
+ *
+ *     vec.rotate(Math.PI / 2);
+ *     // => {x: 0, y: 100, z: 0}
+ *
+ * @param {Number} rad Radians to ratate vector by
+ * @return {Vector} Rotated vector
+ * @api public
+ */
+Vec.prototype.rotate2D = function(rad) {
+  const a = Math.atan2(this.x, this.y);
+  return this.rotateTo2D(rad + a);
+};
+
+
+/*
+Helpers
+*/
+
+const _pi = Math.PI;
+const twoPi = _pi * 2;
