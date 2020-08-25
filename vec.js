@@ -23,8 +23,6 @@
  * # Vectored - A JavaScript 2 and 3D vector math library
  */
 
-const _pi = Math.PI;
-const twoPi = _pi * 2;
 
 /**
  * Constructor. Will also work without the `new` keyword
@@ -177,6 +175,10 @@ Vec.zero = function() {
   return new Vec(0, 0, 0);
 };
 
+/*
+Create vector
+*/
+
 /**
  * Create a vector from an array
  *
@@ -262,6 +264,10 @@ Vec.prototype.toString = function() {
   return `(${this.x}, ${this.y}, ${this.z})`;
 };
 
+/*
+Basic Math
+*/
+
 /**
  * Add two vectors together
  *
@@ -307,6 +313,9 @@ Vec.prototype.subtract = function(v) {
     return new Vec(this.x -= v, this.y -= v, this.z -= v);
   }
 };
+
+// sub short for subract
+Vec.prototype.sub = Vec.prototype.subtract;
 
 /**
  * Multiply two vectors by one another
@@ -356,6 +365,31 @@ Vec.prototype.divide = function(v) {
     return new Vec(this.x /= v, this.y /= v, this.z /= v);
   }
 };
+
+/**
+ * Remainder when dividing two vectors
+ *
+ * @example
+ *     let vec1 = new Vec(1, 3);
+ *     let vec2 = new Vec(4, 2);
+ *
+ *     vec1.remainder(vec2);
+ *     // => {x: 1, y: 1, z: 0}
+ *
+ * @param {Vector} v vector to divide by
+ * @return {Vector} Remainder of the vector
+ * @api public
+ */
+Vec.prototype.remainder = function(v) {
+  if (v instanceof Vec) {
+    return new Vec(this.x %= v.x, this.y %= v.y, this.z %= v.z);
+  } else {
+    return new Vec(this.x %= v, this.y %= v, this.z %= v);
+  }
+};
+
+// rem shorthand for remainder
+Vec.prototype.rem = Vec.prototype.remainder;
 
 /**
  * Create a vector from a 2D angle
@@ -658,27 +692,51 @@ Vec.prototype.lerp = function(v, t) {
   return this.multiply(1 - t).add(i);
 };
 
+/*
+transform vector
+*/
+
 /**
- * Remainder when dividing two vectors
+ * Set the angle of a 2D vector
  *
  * @example
- *     let vec1 = new Vec(1, 3);
- *     let vec2 = new Vec(4, 2);
+ *     let vec = new Vec(100, 0);
  *
- *     vec1.remainder(vec2);
- *     // => {x: 1, y: 1, z: 0}
+ *     vec.rotateTo2D(-Math.PI);
+ *     // => {x: -100, y: 0, z: 0}
  *
- * @param {Vector} v vector to divide by
- * @return {Vector} Remainder of the vector
+ * @param {Number} rad Radians to set vector to
+ * @return {Vector} Rotated vector
  * @api public
  */
-Vec.prototype.remainder = function(v) {
-  if (v instanceof Vec) {
-    return new Vec(this.x %= v.x, this.y %= v.y, this.z %= v.z);
-  } else {
-    return new Vec(this.x %= v, this.y %= v, this.z %= v);
-  }
+Vec.prototype.rotateTo2D = function(rad) {
+  this.x = (this.x * Math.cos(rad)) - (this.y * Math.sin(rad));
+  this.y = (this.x * Math.sin(rad)) + (this.y * Math.cos(rad));
+  return this;
 };
 
-// rem shorthand for remainder
-Vec.prototype.rem = Vec.prototype.remainder;
+/**
+ * Rotate 2D vector by certain angle
+ *
+ * @example
+ *     let vec = new Vec(100, 0);
+ *
+ *     vec.rotate(Math.PI / 2);
+ *     // => {x: 0, y: 100, z: 0}
+ *
+ * @param {Number} rad Radians to ratate vector by
+ * @return {Vector} Rotated vector
+ * @api public
+ */
+Vec.prototype.rotate2D = function(rad) {
+  const a = Math.atan2(this.x, this.y);
+  return this.rotateTo2D(rad + a);
+};
+
+
+/*
+Helpers
+*/
+
+const _pi = Math.PI;
+const twoPi = _pi * 2;
