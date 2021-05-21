@@ -1,28 +1,6 @@
-(function(root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module.
-    define(['b'], factory);
-  } else if (typeof module === 'object' && module.exports) {
-    // Node.
-    // module.exports = factory(require('b'));
-    exports = module.exports = Vec;
-  } else {
-    // Browser globals (root is window)
-    root.returnExports = factory(root.b);
-  }
-}(typeof self !== 'undefined' ? self : this, function(b) {
-  // Use b in some fashion.
-
-  // Just return a value to define the module export.
-  // This example returns an object, but the module
-  // can return a function as the exported value.
-  return {};
-}));
-
 /**
  * # Vectored - A JavaScript 2 and 3D vector math library
  */
-
 
 /**
  * Constructor. Will also work without the `new` keyword
@@ -285,9 +263,9 @@ Basic Math
  */
 Vec.prototype.add = function(v) {
   if (v instanceof Vec) {
-    return new Vec(this.x += v.x, this.y += v.y, this.z += v.z);
+    return new Vec((this.x += v.x), (this.y += v.y), (this.z += v.z));
   } else {
-    return new Vec(this.x += v, this.y += v, this.z += v);
+    return new Vec((this.x += v), (this.y += v), (this.z += v));
   }
 };
 
@@ -308,9 +286,9 @@ Vec.prototype.add = function(v) {
  */
 Vec.prototype.subtract = function(v) {
   if (v instanceof Vec) {
-    return new Vec(this.x -= v.x, this.y -= v.y, this.z -= v.z);
+    return new Vec((this.x -= v.x), (this.y -= v.y), (this.z -= v.z));
   } else {
-    return new Vec(this.x -= v, this.y -= v, this.z -= v);
+    return new Vec((this.x -= v), (this.y -= v), (this.z -= v));
   }
 };
 
@@ -334,9 +312,9 @@ Vec.prototype.sub = Vec.prototype.subtract;
  */
 Vec.prototype.multiply = function(v) {
   if (v instanceof Vec) {
-    return new Vec(this.x *= v.x, this.y *= v.y, this.z *= v.z);
+    return new Vec((this.x *= v.x), (this.y *= v.y), (this.z *= v.z));
   } else {
-    return new Vec(this.x *= v, this.y *= v, this.z *= v);
+    return new Vec((this.x *= v), (this.y *= v), (this.z *= v));
   }
 };
 
@@ -360,9 +338,9 @@ Vec.prototype.mult = Vec.prototype.multiply;
  */
 Vec.prototype.divide = function(v) {
   if (v instanceof Vec) {
-    return new Vec(this.x /= v.x, this.y /= v.y, this.z /= v.z);
+    return new Vec((this.x /= v.x), (this.y /= v.y), (this.z /= v.z));
   } else {
-    return new Vec(this.x /= v, this.y /= v, this.z /= v);
+    return new Vec((this.x /= v), (this.y /= v), (this.z /= v));
   }
 };
 
@@ -382,9 +360,9 @@ Vec.prototype.divide = function(v) {
  */
 Vec.prototype.remainder = function(v) {
   if (v instanceof Vec) {
-    return new Vec(this.x %= v.x, this.y %= v.y, this.z %= v.z);
+    return new Vec((this.x %= v.x), (this.y %= v.y), (this.z %= v.z));
   } else {
-    return new Vec(this.x %= v, this.y %= v, this.z %= v);
+    return new Vec((this.x %= v), (this.y %= v), (this.z %= v));
   }
 };
 
@@ -586,7 +564,7 @@ Vec.prototype.setMag = function(n) {
  * @api public
  */
 Vec.prototype.dot = function(v) {
-  return (this.x * v.x) + (this.y * v.y) + (this.z * v.z);
+  return this.x * v.x + this.y * v.y + this.z * v.z;
 };
 
 /**
@@ -604,7 +582,7 @@ Vec.prototype.dot = function(v) {
  * @api public
  */
 Vec.prototype.cross = function(v) {
-  return (this.x * v.x) - (this.y * v.y) - (this.z * v.z);
+  return this.x * v.x - this.y * v.y - this.z * v.z;
 };
 
 /**
@@ -664,11 +642,7 @@ Vec.prototype.min = function(v) {
  * @api public
  */
 Vec.prototype.round = function() {
-  return new Vec(
-      Math.round(this.x),
-      Math.round(this.y),
-      Math.round(this.z),
-  );
+  return new Vec(Math.round(this.x), Math.round(this.y), Math.round(this.z));
 };
 
 /**
@@ -710,8 +684,8 @@ transform vector
  * @api public
  */
 Vec.prototype.rotateTo2D = function(rad) {
-  this.x = (this.x * Math.cos(rad)) - (this.y * Math.sin(rad));
-  this.y = (this.x * Math.sin(rad)) + (this.y * Math.cos(rad));
+  this.x = this.x * Math.cos(rad) - this.y * Math.sin(rad);
+  this.y = this.x * Math.sin(rad) + this.y * Math.cos(rad);
   return this;
 };
 
@@ -732,7 +706,6 @@ Vec.prototype.rotate2D = function(rad) {
   const a = Math.atan2(this.x, this.y);
   return this.rotateTo2D(rad + a);
 };
-
 
 /*
 Helpers
