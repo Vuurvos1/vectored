@@ -6,6 +6,7 @@
   "scripts": {
     "lint": "eslint --fix --ext .js .",
     "uglify": "minify index.js --out-file build/vec.min.js",
+    "browserfy": "browserify index.js > build/vec.js",
     "build": "npm run lint && browserify index.js > build/vec.js && minify build/vec.js --out-file build/vec.min.js"
   },
   "repository": {

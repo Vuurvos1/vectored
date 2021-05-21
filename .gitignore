@@ -1,5 +1,4 @@
 node_modules/
 test/
-build/
 .vscode/
 .DS_Store
