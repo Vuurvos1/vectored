@@ -1,6 +1,6 @@
 {
   "name": "vectored",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A JavaScript 2 and 3D vector math library",
   "main": "vec.js",
   "scripts": {
@@ -25,7 +25,6 @@
     "url": "https://github.com/Vuurvos1/vectored/issues"
   },
   "homepage": "https://github.com/Vuurvos1/vectored#readme",
-  "dependencies": {},
   "devDependencies": {
     "babel-minify": "^0.5.1",
     "browserify": "^17.0.0",
@@ -35,7 +34,7 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "prettier": "^2.0.5",
+    "prettier": "^2.3.0",
     "uglify-js": "^3.10.1"
   }
 }

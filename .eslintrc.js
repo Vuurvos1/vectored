@@ -10,6 +10,8 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    'space-before-function-paren': ['error', 'always'],
+    'linebreak-style': 0,
     'new-cap': 0,
   },
 };

@@ -15,7 +15,7 @@
  * @return {Vec}
  * @api public
  */
-function Vec(x, y, z) {
+function Vec (x, y, z) {
   if (!(this instanceof Vec)) {
     return new Vec(x, y, z);
   }
@@ -37,7 +37,7 @@ function Vec(x, y, z) {
  * @return {Vec} New Vec instance
  * @api public
  */
-Vec.up = function() {
+Vec.up = function () {
   return new Vec(0, 1, 0);
 };
 
@@ -53,7 +53,7 @@ Vec.up = function() {
  * @return {Vec} New Vec instance
  * @api public
  */
-Vec.left = function() {
+Vec.left = function () {
   return new Vec(-1, 0, 0);
 };
 
@@ -69,7 +69,7 @@ Vec.left = function() {
  * @return {Vec} New Vec instance
  * @api public
  */
-Vec.down = function() {
+Vec.down = function () {
   return new Vec(0, -1, 0);
 };
 
@@ -85,7 +85,7 @@ Vec.down = function() {
  * @return {Vec} New Vec instance
  * @api public
  */
-Vec.right = function() {
+Vec.right = function () {
   return new Vec(1, 0, 0);
 };
 
@@ -101,7 +101,7 @@ Vec.right = function() {
  * @return {Vec} New Vec instance
  * @api public
  */
-Vec.forward = function() {
+Vec.forward = function () {
   return new Vec(0, 0, 1);
 };
 
@@ -117,7 +117,7 @@ Vec.forward = function() {
  * @return {Vec} New Vec instance
  * @api public
  */
-Vec.back = function() {
+Vec.back = function () {
   return new Vec(0, 0, -1);
 };
 
@@ -133,7 +133,7 @@ Vec.back = function() {
  * @return {Vec} New Vec instance
  * @api public
  */
-Vec.one = function() {
+Vec.one = function () {
   return new Vec(1, 1, 1);
 };
 
@@ -149,7 +149,7 @@ Vec.one = function() {
  * @return {Vec} New Vec instance
  * @api public
  */
-Vec.zero = function() {
+Vec.zero = function () {
   return new Vec(0, 0, 0);
 };
 
@@ -172,7 +172,7 @@ Create vector
  * @return {Vec} New Vec instance
  * @api public
  */
-Vec.fromArray = function(arr) {
+Vec.fromArray = function (arr) {
   return new Vec(arr[0] || 0, arr[1] || 0, arr[2] || 0);
 };
 
@@ -190,7 +190,7 @@ Vec.fromArray = function(arr) {
  * @return {Vec} New Vec instance
  * @api public
  */
-Vec.formObject = function(obj) {
+Vec.formObject = function (obj) {
   return new Vec(obj.x || 0, ojb.y || 0, obj.z || 0);
 };
 
@@ -206,7 +206,7 @@ Vec.formObject = function(obj) {
  * @return {Object} Object representing the vector
  * @api public
  */
-Vec.prototype.toObject = function() {
+Vec.prototype.toObject = function () {
   return {x: this.x, y: this.y, z: this.z};
 };
 
@@ -222,7 +222,7 @@ Vec.prototype.toObject = function() {
  * @return {Array} Array representing the vector
  * @api public
  */
-Vec.prototype.toArray = function() {
+Vec.prototype.toArray = function () {
   return [this.x, this.y, this.z];
 };
 
@@ -238,7 +238,7 @@ Vec.prototype.toArray = function() {
  * @return {String} String representing the vector
  * @api public
  */
-Vec.prototype.toString = function() {
+Vec.prototype.toString = function () {
   return `(${this.x}, ${this.y}, ${this.z})`;
 };
 
@@ -261,7 +261,7 @@ Basic Math
  * @return {Vec} New Vec instance
  * @api public
  */
-Vec.prototype.add = function(v) {
+Vec.prototype.add = function (v) {
   if (v instanceof Vec) {
     return new Vec((this.x += v.x), (this.y += v.y), (this.z += v.z));
   } else {
@@ -284,14 +284,13 @@ Vec.prototype.add = function(v) {
  * @return {Vec} `this` for chaining capabilities
  * @api public
  */
-Vec.prototype.subtract = function(v) {
+Vec.prototype.subtract = function (v) {
   if (v instanceof Vec) {
     return new Vec((this.x -= v.x), (this.y -= v.y), (this.z -= v.z));
   } else {
     return new Vec((this.x -= v), (this.y -= v), (this.z -= v));
   }
 };
-
 // sub short for subract
 Vec.prototype.sub = Vec.prototype.subtract;
 
@@ -310,14 +309,13 @@ Vec.prototype.sub = Vec.prototype.subtract;
  * @return {Vec} New Vec instance
  * @api public
  */
-Vec.prototype.multiply = function(v) {
+Vec.prototype.multiply = function (v) {
   if (v instanceof Vec) {
     return new Vec((this.x *= v.x), (this.y *= v.y), (this.z *= v.z));
   } else {
     return new Vec((this.x *= v), (this.y *= v), (this.z *= v));
   }
 };
-
 // mult shorthand for multiply
 Vec.prototype.mult = Vec.prototype.multiply;
 
@@ -336,13 +334,15 @@ Vec.prototype.mult = Vec.prototype.multiply;
  * @return {Vec} New Vec instance
  * @api public
  */
-Vec.prototype.divide = function(v) {
+Vec.prototype.divide = function (v) {
   if (v instanceof Vec) {
     return new Vec((this.x /= v.x), (this.y /= v.y), (this.z /= v.z));
   } else {
     return new Vec((this.x /= v), (this.y /= v), (this.z /= v));
   }
 };
+// div shorthand for divide
+Vec.prototype.div = Vec.prototype.divide;
 
 /**
  * Remainder when dividing two vectors
@@ -358,7 +358,7 @@ Vec.prototype.divide = function(v) {
  * @return {Vector} Remainder of the vector
  * @api public
  */
-Vec.prototype.remainder = function(v) {
+Vec.prototype.remainder = function (v) {
   if (v instanceof Vec) {
     return new Vec((this.x %= v.x), (this.y %= v.y), (this.z %= v.z));
   } else {
@@ -383,7 +383,7 @@ Vec.prototype.rem = Vec.prototype.remainder;
  * @return {Vec} `this` for chaining capabilities
  * @api public
  */
-Vec.fromAngle = function fromAngle(angle, length) {
+Vec.fromAngle = function fromAngle (angle, length) {
   if (typeof length === 'undefined') {
     length = 1;
   }
@@ -405,7 +405,7 @@ Vec.fromAngle = function fromAngle(angle, length) {
  * @return {Vec} `this` for chaining capabilities
  * @api public
  */
-Vec.fromAngles = function(theta, phi, length) {
+Vec.fromAngles = function (theta, phi, length) {
   if (typeof length === 'undefined') {
     length = 1;
   }
@@ -433,7 +433,7 @@ Vec.fromAngles = function(theta, phi, length) {
  * @return {Vec} `this` for chaining capabilities
  * @api public
  */
-Vec.random2D = function random2D() {
+Vec.random2D = function random2D () {
   return Vec.fromAngle(Math.random() * twoPi);
 };
 
@@ -449,7 +449,7 @@ Vec.random2D = function random2D() {
  * @return {Vec} New Vec instance
  * @api public
  */
-Vec.random3D = function random3D() {
+Vec.random3D = function random3D () {
   const angle = Math.random() * twoPi;
   const vz = Math.random() * 2 - 1;
   const vzBase = Math.sqrt(1 - vz * vz);
@@ -471,7 +471,7 @@ Vec.random3D = function random3D() {
  * @return {Vec} `this` for chaining capabilities
  * @api public
  */
-Vec.prototype.negative = function() {
+Vec.prototype.negative = function () {
   return new Vec(-this.x, -this.y, -this.z);
 };
 
@@ -487,7 +487,7 @@ Vec.prototype.negative = function() {
  * @return {Number} Length / Magnitude
  * @api public
  */
-Vec.prototype.length = function() {
+Vec.prototype.length = function () {
   return Math.sqrt(this.lengthSq());
 };
 
@@ -505,7 +505,7 @@ Vec.prototype.magnitude = Vec.prototype.length;
  * @return {Number} Squared lenght / magnitude of the vector
  * @api public
  */
-Vec.prototype.lengthSq = function() {
+Vec.prototype.lengthSq = function () {
   return Math.pow(this.x, 2) + Math.pow(this.y, 2) + Math.pow(this.z, 2);
 };
 
@@ -522,7 +522,7 @@ Vec.prototype.lengthSq = function() {
  * @return {Vec} `this` for chaining capabilities
  * @api public
  */
-Vec.prototype.normalize = function() {
+Vec.prototype.normalize = function () {
   const length = this.length();
 
   if (length !== 0) {
@@ -545,7 +545,7 @@ Vec.prototype.normalize = function() {
  * @return {Vec} `this` for chaining capabilities
  * @api public
  */
-Vec.prototype.setMag = function(n) {
+Vec.prototype.setMag = function (n) {
   return this.normalize().multiply(n);
 };
 
@@ -563,7 +563,7 @@ Vec.prototype.setMag = function(n) {
  * @return {Number} Dot product
  * @api public
  */
-Vec.prototype.dot = function(v) {
+Vec.prototype.dot = function (v) {
   return this.x * v.x + this.y * v.y + this.z * v.z;
 };
 
@@ -581,7 +581,7 @@ Vec.prototype.dot = function(v) {
  * @return {Number} Cross product
  * @api public
  */
-Vec.prototype.cross = function(v) {
+Vec.prototype.cross = function (v) {
   return this.x * v.x - this.y * v.y - this.z * v.z;
 };
 
@@ -599,7 +599,7 @@ Vec.prototype.cross = function(v) {
  * @return {Vector} Maximum values of the 2 vectors
  * @api public
  */
-Vec.prototype.max = function(v) {
+Vec.prototype.max = function (v) {
   return new Vec(
       Math.max(this.x, v.x),
       Math.max(this.y, v.y),
@@ -621,7 +621,7 @@ Vec.prototype.max = function(v) {
  * @return {Vector} Minimum of vector
  * @api public
  */
-Vec.prototype.min = function(v) {
+Vec.prototype.min = function (v) {
   return new Vec(
       Math.min(this.x, v.x),
       Math.min(this.y, v.y),
@@ -641,7 +641,7 @@ Vec.prototype.min = function(v) {
  * @return {Vector} Rounded vector
  * @api public
  */
-Vec.prototype.round = function() {
+Vec.prototype.round = function () {
   return new Vec(Math.round(this.x), Math.round(this.y), Math.round(this.z));
 };
 
@@ -660,7 +660,7 @@ Vec.prototype.round = function() {
  * @return {Vector} Lerped vector
  * @api public
  */
-Vec.prototype.lerp = function(v, t) {
+Vec.prototype.lerp = function (v, t) {
   // a * (1-t) + b*t)
   const i = v.multiply(t);
   return this.multiply(1 - t).add(i);
@@ -683,7 +683,7 @@ transform vector
  * @return {Vector} Rotated vector
  * @api public
  */
-Vec.prototype.rotateTo2D = function(rad) {
+Vec.prototype.rotateTo2D = function (rad) {
   this.x = this.x * Math.cos(rad) - this.y * Math.sin(rad);
   this.y = this.x * Math.sin(rad) + this.y * Math.cos(rad);
   return this;
@@ -702,9 +702,30 @@ Vec.prototype.rotateTo2D = function(rad) {
  * @return {Vector} Rotated vector
  * @api public
  */
-Vec.prototype.rotate2D = function(rad) {
+Vec.prototype.rotate2D = function (rad) {
   const a = Math.atan2(this.x, this.y);
   return this.rotateTo2D(rad + a);
+};
+
+/*
+  logic
+*/
+
+/**
+ * Check if two vectors are equal
+ *
+ * @example
+ *     let vec = new Vec(100, 0);
+ *
+ *     vec.equal(new Vec(100, 0));
+ *     // => True
+ *
+ * @param {Vec} v Other vector you want to compare to
+ * @return {Boolean} result of vector comparison
+ * @api public
+ */
+Vec.prototype.equals = function (v) {
+  return (this.x == v.x && this.y == v.y && this.z == this.z);
 };
 
 /*
