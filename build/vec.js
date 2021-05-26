@@ -366,7 +366,6 @@ Vec.prototype.remainder = function (v) {
     return new Vec((this.x %= v), (this.y %= v), (this.z %= v));
   }
 };
-
 // rem shorthand for remainder
 Vec.prototype.rem = Vec.prototype.remainder;
 
@@ -491,7 +490,6 @@ Vec.prototype.negative = function () {
 Vec.prototype.length = function () {
   return Math.sqrt(this.lengthSq());
 };
-
 Vec.prototype.magnitude = Vec.prototype.length;
 
 /**
@@ -507,8 +505,13 @@ Vec.prototype.magnitude = Vec.prototype.length;
  * @api public
  */
 Vec.prototype.lengthSq = function () {
-  return Math.pow(this.x, 2) + Math.pow(this.y, 2) + Math.pow(this.z, 2);
+  const x = this.x;
+  const y = this.y;
+  const z = this.z;
+  return x * x + y * y + z * z;
 };
+Vec.prototype.magnitudeSq = Vec.prototype.lengthSq;
+Vec.prototype.magsq = Vec.prototype.lengthSq;
 
 /**
  * Normalize the vector lenght to 1
@@ -667,6 +670,29 @@ Vec.prototype.lerp = function (v, t) {
   return this.multiply(1 - t).add(i);
 };
 
+/**
+ * Set vector values
+ *
+ * @example
+ *     let vec = new Vec(1, 3, 2);
+ *
+ *     vec.set(4, 5, 0);
+ *     // => {x: 4, y: 5, z: 0}
+ *
+ * @param {Number} x New x
+ * @param {Number} y New y
+ * @param {Number} z New z
+ * @return {Vector} New vector
+ * @api public
+ */
+Vec.prototype.set = function (x, y, z) {
+  return new Vec(
+    x ? x : this.x,
+    y ? y :this.y,
+    z ? z : this.z,
+  );
+};
+
 /*
 transform vector
 */
@@ -727,6 +753,23 @@ Vec.prototype.rotate2D = function (rad) {
  */
 Vec.prototype.equals = function (v) {
   return (this.x == v.x && this.y == v.y && this.z == this.z);
+};
+
+/**
+ * Check if two vectors are NOT equal
+ *
+ * @example
+ *     let vec = new Vec(100, 0);
+ *
+ *     vec.equal(new Vec(100, 0));
+ *     // => False
+ *
+ * @param {Vec} v Other vector you want to compare to
+ * @return {Boolean} result of vector comparison
+ * @api public
+ */
+Vec.prototype.notEqual = function (v) {
+  return !this.equals(v);
 };
 
 /*
