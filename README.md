@@ -11,44 +11,33 @@ npm install vectored --save
 ```
 
 ```js
-const Vec = require('./vec.js')
+const Vec = require('./vec.js');
 
-let vector = new Vec(4, 2, 0)
+let vector = new Vec(4, 2, 0);
 ```
 
 ### In browser
 
-Include the script in the body or head of the html
+Include the script inside the html
 
 ```html
-<!-- Link file -->
+<!-- Link to file directly -->
 <script src="./vec.js"></script>
 
-<!-- or link from Github -->
-<script src="https://raw.githubusercontent.com/Vuurvos1/vectored/master/build/vec.min.js"></script>
+<!-- or latest via url -->
+<script src="https://cdn.jsdelivr.net/npm/vectored@latest/build/vec.min.js"></script>
+
+<!-- or to a specific version-->
+<script src="https://cdn.jsdelivr.net/npm/vectored@0.4/build/vec.min.js"></script>
 
 <!-- you can use vec.js here -->
 <script src="/"></script>
 ```
 
-```html
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-
-  <!-- Link file -->
-  <script src="./vec.js"></script>
-
-  <!-- or link from Github -->
-  <script src="https://raw.githubusercontent.com/Vuurvos1/vectored/master/build/vec.min.js"></script>
-</head>
-```
-
 ## Documentation
 
-[link to documentation](https://github.com/Vuurvos1/vectored/blob/master/docs/documentation.md)
+[link to documentation](https://github.com/Vuurvos1/vectored/blob/main/docs/documentation.md)
 
 ## License
 
-MIT
+Licensed by [MIT](https://github.com/Vuurvos1/vectored/blob/main/LICENSE)

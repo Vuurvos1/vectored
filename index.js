@@ -1,3 +1,4 @@
+exports = module.exports = Vec;
 /**
  * # Vectored - A JavaScript 2 and 3D vector math library
  */
@@ -23,7 +24,7 @@ function Vec (x, y, z) {
   this.x = x || 0;
   this.y = y || 0;
   this.z = z || 0;
-}
+};
 
 /**
  * Returns a vector that faces up
@@ -692,6 +693,33 @@ Vec.prototype.set = function (x, y, z) {
   );
 };
 
+/**
+ * Clamp the length of a vector
+ *
+ * @example
+ *     let vec = new Vec(2, 4);
+ *
+ *     vec.clamp(1, 3);
+ *     // => {x: 4, y: 5, z: 0}
+ *
+ * @param {Number} min Minimum length of the vector
+ * @param {Number} max Maximim length of the vector
+ * @return {Vector} Clamped vector
+ * @api public
+ */
+Vec.prototype.clamp = function (min, max) {
+  const length = this.length();
+
+  if (length > max) {
+    return this.setMag(max);
+  } else if (length < min) {
+    return this.setMag(min);
+  } else {
+    return this;
+  }
+};
+
+
 /*
 transform vector
 */
@@ -777,3 +805,5 @@ Helpers
 
 const _pi = Math.PI;
 const twoPi = _pi * 2;
+
+// module.exports = Vec;
