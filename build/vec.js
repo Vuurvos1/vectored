@@ -573,7 +573,6 @@ Vec.prototype.setMag = function (n) {
 
 /**
  * Calculates the dot product of the vector and another
- *
  * @example
  *     let vec1 = new Vec(100, 50);
  *     let vec2 = new Vec(200, 60);
@@ -581,12 +580,18 @@ Vec.prototype.setMag = function (n) {
  *     vec1.dot(vec2);
  *     // => 23000
  *
- * @param {Vector} v The second vector
+ * @param {Number|Vector} x x component of vector or Vector object
+ * @param {Number} y y component of vector
+ * @param {Number} z z component of vector
  * @return {Number} Dot product
  * @api public
  */
-Vec.prototype.dot = function (v) {
-  return this.x * v.x + this.y * v.y + this.z * v.z;
+Vec.prototype.dot = function (x, y, z) {
+  if (x instanceof Vec) {
+    return this.x * v.x + this.y * v.y + this.z * v.z;
+  }
+
+  return this.x * (x || 0) + this.y * (y || 0) + this.z * (z || 0);
 };
 
 /**
