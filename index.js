@@ -1,3 +1,4 @@
+exports = module.exports = Vec;
 /**
  * # Vectored - A JavaScript 2 and 3D vector math library
  */
@@ -23,7 +24,7 @@ function Vec (x, y, z) {
   this.x = x || 0;
   this.y = y || 0;
   this.z = z || 0;
-}
+};
 
 /**
  * Returns a vector that faces up
@@ -240,6 +241,23 @@ Vec.prototype.toArray = function () {
  */
 Vec.prototype.toString = function () {
   return `(${this.x}, ${this.y}, ${this.z})`;
+};
+
+/**
+ * Returns a copy of a vector
+ *
+ * @example
+ *     let vec1 = new Vec(10, 20);
+ *     let vec2 = vec.copy();
+ *
+ *     console.log(vec2);
+ *     // => '(10, 20, 0)'
+ *
+ * @return {String} String representing the vector
+ * @api public
+ */
+Vec.prototype.copy = function () {
+  return new Vec(this.x, this.y, this.z);
 };
 
 /*
@@ -554,7 +572,6 @@ Vec.prototype.setMag = function (n) {
 
 /**
  * Calculates the dot product of the vector and another
- *
  * @example
  *     let vec1 = new Vec(100, 50);
  *     let vec2 = new Vec(200, 60);
@@ -562,12 +579,18 @@ Vec.prototype.setMag = function (n) {
  *     vec1.dot(vec2);
  *     // => 23000
  *
- * @param {Vector} v The second vector
+ * @param {Number|Vector} x x component of vector or Vector object
+ * @param {Number} y y component of vector
+ * @param {Number} z z component of vector
  * @return {Number} Dot product
  * @api public
  */
-Vec.prototype.dot = function (v) {
-  return this.x * v.x + this.y * v.y + this.z * v.z;
+Vec.prototype.dot = function (x, y, z) {
+  if (x instanceof Vec) {
+    return this.x * v.x + this.y * v.y + this.z * v.z;
+  }
+
+  return this.x * (x || 0) + this.y * (y || 0) + this.z * (z || 0);
 };
 
 /**
@@ -692,6 +715,33 @@ Vec.prototype.set = function (x, y, z) {
   );
 };
 
+/**
+ * Clamp the length of a vector
+ *
+ * @example
+ *     let vec = new Vec(2, 4);
+ *
+ *     vec.clamp(1, 3);
+ *     // => {x: 4, y: 5, z: 0}
+ *
+ * @param {Number} min Minimum length of the vector
+ * @param {Number} max Maximim length of the vector
+ * @return {Vector} Clamped vector
+ * @api public
+ */
+Vec.prototype.clamp = function (min, max) {
+  const length = this.length();
+
+  if (length > max) {
+    return this.setMag(max);
+  } else if (length < min) {
+    return this.setMag(min);
+  } else {
+    return this;
+  }
+};
+
+
 /*
 transform vector
 */
@@ -777,3 +827,5 @@ Helpers
 
 const _pi = Math.PI;
 const twoPi = _pi * 2;
+
+// module.exports = Vec;
