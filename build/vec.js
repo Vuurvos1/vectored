@@ -244,6 +244,23 @@ Vec.prototype.toString = function () {
   return `(${this.x}, ${this.y}, ${this.z})`;
 };
 
+/**
+ * Returns a copy of a vector
+ *
+ * @example
+ *     let vec1 = new Vec(10, 20);
+ *     let vec2 = vec.copy();
+ *
+ *     console.log(vec2);
+ *     // => '(10, 20, 0)'
+ *
+ * @return {String} String representing the vector
+ * @api public
+ */
+Vec.prototype.copy = function () {
+  return new Vec(this.x, this.y, this.z);
+};
+
 /*
 Basic Math
 */
