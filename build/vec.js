@@ -514,23 +514,18 @@ Vec.prototype.magnitude = Vec.prototype.length;
  * Return the distance between 2 vectors if they where points
  *
  * @example
- *     let vec1 = new Vec(3, 4, 0);
- *     let vec2 = new Vec(3, 4, 0);
+ *     let vec1 = new Vec(3, 5, 0);
+ *     let vec2 = new Vec(2, 1, 0);
  *
- *     vector.lengthSq();
- *     // => 25
+ *     vec1.distance(vec2);
+ *     // => 4.1231056
  *
- * @param {Vector} v component of vector or Vector object
+ * @param {Vector} v other vector point
  * @return {Number} length between two points
  * @api public
  */
 Vec.prototype.distance = function (v) {
-  console.log(this);
-  console.log(v);
-
-  const diff = this.sub(v);
-  // return this.sub(v).magnitude();
-  return diff.magnitude();
+  return this.sub(v).magnitude();
 };
 
 /**
