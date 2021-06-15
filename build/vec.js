@@ -25,7 +25,7 @@ function Vec (x, y, z) {
   this.x = x || 0;
   this.y = y || 0;
   this.z = z || 0;
-};
+}
 
 /**
  * Returns a vector that faces up
@@ -511,6 +511,29 @@ Vec.prototype.length = function () {
 Vec.prototype.magnitude = Vec.prototype.length;
 
 /**
+ * Return the distance between 2 vectors if they where points
+ *
+ * @example
+ *     let vec1 = new Vec(3, 4, 0);
+ *     let vec2 = new Vec(3, 4, 0);
+ *
+ *     vector.lengthSq();
+ *     // => 25
+ *
+ * @param {Vector} v component of vector or Vector object
+ * @return {Number} length between two points
+ * @api public
+ */
+Vec.prototype.distance = function (v) {
+  console.log(this);
+  console.log(v);
+
+  const diff = this.sub(v);
+  // return this.sub(v).magnitude();
+  return diff.magnitude();
+};
+
+/**
  * Get the squared lenght / magnitude of a Vector
  *
  * @example
@@ -709,11 +732,7 @@ Vec.prototype.lerp = function (v, t) {
  * @api public
  */
 Vec.prototype.set = function (x, y, z) {
-  return new Vec(
-    x ? x : this.x,
-    y ? y :this.y,
-    z ? z : this.z,
-  );
+  return new Vec(x ? x : this.x, y ? y : this.y, z ? z : this.z);
 };
 
 /**
@@ -741,7 +760,6 @@ Vec.prototype.clamp = function (min, max) {
     return this;
   }
 };
-
 
 /*
 transform vector
@@ -802,7 +820,7 @@ Vec.prototype.rotate2D = function (rad) {
  * @api public
  */
 Vec.prototype.equals = function (v) {
-  return (this.x == v.x && this.y == v.y && this.z == this.z);
+  return this.x == v.x && this.y == v.y && this.z == this.z;
 };
 
 /**
