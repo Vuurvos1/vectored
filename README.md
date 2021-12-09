@@ -1,3 +1,5 @@
+![vectored a JavaScript 2 and 3D vector math library banner](docs/banner.svg)
+
 # Vectored
 
 A JavaScript 2 and 3D vector math library
