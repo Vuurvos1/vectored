@@ -2,7 +2,7 @@
   "name": "vectored",
   "version": "0.4.2",
   "description": "A JavaScript 2 and 3D vector math library",
-  "main": "vec.js",
+  "main": "index.js",
   "scripts": {
     "lint": "eslint --fix --ext .js .",
     "uglify": "minify index.js --out-file build/vec.min.js",
