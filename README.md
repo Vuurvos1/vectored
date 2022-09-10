@@ -29,11 +29,11 @@ Include the script inside the html
 
 <!-- or latest via url -->
 
-<script src="https://cdn.jsdelivr.net/npm/vectored@latest/build/vec.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vectored@latest/dist/vec.min.js"></script>
 
 <!-- or to a more specific version-->
 
-<script src="https://cdn.jsdelivr.net/npm/vectored@1.0/build/vec.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vectored@1.0/dist/vec.min.js"></script>
 
 <!-- you can use vec.js here -->
 
