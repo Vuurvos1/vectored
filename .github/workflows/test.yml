@@ -10,9 +10,10 @@ jobs:
     - uses: actions/setup-node@v3
       with:
         node-version: '16.x'
-
+    
+    - uses: pnpm/action-setup@v2.2.2
+    
     - name: Install and Test 🧪
-      uses: pnpm/action-setup@v2.2.2
       run: |
         pnpm install --frozen-lockfile
         pnpm build 
