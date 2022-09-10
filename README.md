@@ -24,15 +24,19 @@ Include the script inside the html
 
 ```html
 <!-- Link to file directly -->
+
 <script src="./vec.js"></script>
 
 <!-- or latest via url -->
+
 <script src="https://cdn.jsdelivr.net/npm/vectored@latest/build/vec.min.js"></script>
 
-<!-- or to a specific version-->
-<script src="https://cdn.jsdelivr.net/npm/vectored@0.4/build/vec.min.js"></script>
+<!-- or to a more specific version-->
+
+<script src="https://cdn.jsdelivr.net/npm/vectored@1.0/build/vec.min.js"></script>
 
 <!-- you can use vec.js here -->
+
 <script src="/"></script>
 ```
 

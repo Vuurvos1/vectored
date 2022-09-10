@@ -1,4 +1,3 @@
-exports = module.exports = Vec;
 /**
  * # Vectored - A JavaScript 2 and 3D vector math library
  */
@@ -16,14 +15,14 @@ exports = module.exports = Vec;
  * @return {Vec}
  * @api public
  */
-function Vec (x, y, z) {
-  if (!(this instanceof Vec)) {
-    return new Vec(x, y, z);
-  }
+function Vec(x, y, z) {
+	if (!(this instanceof Vec)) {
+		return new Vec(x, y, z);
+	}
 
-  this.x = x || 0;
-  this.y = y || 0;
-  this.z = z || 0;
+	this.x = x || 0;
+	this.y = y || 0;
+	this.z = z || 0;
 }
 
 /**
@@ -39,7 +38,7 @@ function Vec (x, y, z) {
  * @api public
  */
 Vec.up = function () {
-  return new Vec(0, 1, 0);
+	return new Vec(0, 1, 0);
 };
 
 /**
@@ -55,7 +54,7 @@ Vec.up = function () {
  * @api public
  */
 Vec.left = function () {
-  return new Vec(-1, 0, 0);
+	return new Vec(-1, 0, 0);
 };
 
 /**
@@ -71,7 +70,7 @@ Vec.left = function () {
  * @api public
  */
 Vec.down = function () {
-  return new Vec(0, -1, 0);
+	return new Vec(0, -1, 0);
 };
 
 /**
@@ -87,7 +86,7 @@ Vec.down = function () {
  * @api public
  */
 Vec.right = function () {
-  return new Vec(1, 0, 0);
+	return new Vec(1, 0, 0);
 };
 
 /**
@@ -103,7 +102,7 @@ Vec.right = function () {
  * @api public
  */
 Vec.forward = function () {
-  return new Vec(0, 0, 1);
+	return new Vec(0, 0, 1);
 };
 
 /**
@@ -119,7 +118,7 @@ Vec.forward = function () {
  * @api public
  */
 Vec.back = function () {
-  return new Vec(0, 0, -1);
+	return new Vec(0, 0, -1);
 };
 
 /**
@@ -135,7 +134,7 @@ Vec.back = function () {
  * @api public
  */
 Vec.one = function () {
-  return new Vec(1, 1, 1);
+	return new Vec(1, 1, 1);
 };
 
 /**
@@ -151,7 +150,7 @@ Vec.one = function () {
  * @api public
  */
 Vec.zero = function () {
-  return new Vec(0, 0, 0);
+	return new Vec(0, 0, 0);
 };
 
 /*
@@ -174,7 +173,7 @@ Create vector
  * @api public
  */
 Vec.fromArray = function (arr) {
-  return new Vec(arr[0] || 0, arr[1] || 0, arr[2] || 0);
+	return new Vec(arr[0] || 0, arr[1] || 0, arr[2] || 0);
 };
 
 /**
@@ -192,7 +191,7 @@ Vec.fromArray = function (arr) {
  * @api public
  */
 Vec.formObject = function (obj) {
-  return new Vec(obj.x || 0, ojb.y || 0, obj.z || 0);
+	return new Vec(obj.x || 0, obj.y || 0, obj.z || 0);
 };
 
 /**
@@ -208,7 +207,7 @@ Vec.formObject = function (obj) {
  * @api public
  */
 Vec.prototype.toObject = function () {
-  return {x: this.x, y: this.y, z: this.z};
+	return { x: this.x, y: this.y, z: this.z };
 };
 
 /**
@@ -224,7 +223,7 @@ Vec.prototype.toObject = function () {
  * @api public
  */
 Vec.prototype.toArray = function () {
-  return [this.x, this.y, this.z];
+	return [this.x, this.y, this.z];
 };
 
 /**
@@ -240,7 +239,7 @@ Vec.prototype.toArray = function () {
  * @api public
  */
 Vec.prototype.toString = function () {
-  return `(${this.x}, ${this.y}, ${this.z})`;
+	return `x:${this.x} y:${this.y} z:${this.z}`;
 };
 
 /**
@@ -257,7 +256,7 @@ Vec.prototype.toString = function () {
  * @api public
  */
 Vec.prototype.copy = function () {
-  return new Vec(this.x, this.y, this.z);
+	return new Vec(this.x, this.y, this.z);
 };
 
 /*
@@ -280,11 +279,11 @@ Basic Math
  * @api public
  */
 Vec.prototype.add = function (v) {
-  if (v instanceof Vec) {
-    return new Vec((this.x += v.x), (this.y += v.y), (this.z += v.z));
-  } else {
-    return new Vec((this.x += v), (this.y += v), (this.z += v));
-  }
+	if (v instanceof Vec) {
+		return new Vec((this.x += v.x), (this.y += v.y), (this.z += v.z));
+	} else {
+		return new Vec((this.x += v), (this.y += v), (this.z += v));
+	}
 };
 
 /**
@@ -303,11 +302,11 @@ Vec.prototype.add = function (v) {
  * @api public
  */
 Vec.prototype.subtract = function (v) {
-  if (v instanceof Vec) {
-    return new Vec((this.x -= v.x), (this.y -= v.y), (this.z -= v.z));
-  } else {
-    return new Vec((this.x -= v), (this.y -= v), (this.z -= v));
-  }
+	if (v instanceof Vec) {
+		return new Vec((this.x -= v.x), (this.y -= v.y), (this.z -= v.z));
+	} else {
+		return new Vec((this.x -= v), (this.y -= v), (this.z -= v));
+	}
 };
 // sub short for subract
 Vec.prototype.sub = Vec.prototype.subtract;
@@ -328,11 +327,11 @@ Vec.prototype.sub = Vec.prototype.subtract;
  * @api public
  */
 Vec.prototype.multiply = function (v) {
-  if (v instanceof Vec) {
-    return new Vec((this.x *= v.x), (this.y *= v.y), (this.z *= v.z));
-  } else {
-    return new Vec((this.x *= v), (this.y *= v), (this.z *= v));
-  }
+	if (v instanceof Vec) {
+		return new Vec((this.x *= v.x), (this.y *= v.y), (this.z *= v.z));
+	} else {
+		return new Vec((this.x *= v), (this.y *= v), (this.z *= v));
+	}
 };
 // mult shorthand for multiply
 Vec.prototype.mult = Vec.prototype.multiply;
@@ -353,11 +352,11 @@ Vec.prototype.mult = Vec.prototype.multiply;
  * @api public
  */
 Vec.prototype.divide = function (v) {
-  if (v instanceof Vec) {
-    return new Vec((this.x /= v.x), (this.y /= v.y), (this.z /= v.z));
-  } else {
-    return new Vec((this.x /= v), (this.y /= v), (this.z /= v));
-  }
+	if (v instanceof Vec) {
+		return new Vec((this.x /= v.x), (this.y /= v.y), (this.z /= v.z));
+	} else {
+		return new Vec((this.x /= v), (this.y /= v), (this.z /= v));
+	}
 };
 // div shorthand for divide
 Vec.prototype.div = Vec.prototype.divide;
@@ -377,11 +376,11 @@ Vec.prototype.div = Vec.prototype.divide;
  * @api public
  */
 Vec.prototype.remainder = function (v) {
-  if (v instanceof Vec) {
-    return new Vec((this.x %= v.x), (this.y %= v.y), (this.z %= v.z));
-  } else {
-    return new Vec((this.x %= v), (this.y %= v), (this.z %= v));
-  }
+	if (v instanceof Vec) {
+		return new Vec((this.x %= v.x), (this.y %= v.y), (this.z %= v.z));
+	} else {
+		return new Vec((this.x %= v), (this.y %= v), (this.z %= v));
+	}
 };
 // rem shorthand for remainder
 Vec.prototype.rem = Vec.prototype.remainder;
@@ -400,11 +399,11 @@ Vec.prototype.rem = Vec.prototype.remainder;
  * @return {Vec} `this` for chaining capabilities
  * @api public
  */
-Vec.fromAngle = function fromAngle (angle, length) {
-  if (typeof length === 'undefined') {
-    length = 1;
-  }
-  return new Vec(length * Math.cos(angle), length * Math.sin(angle), 0);
+Vec.fromAngle = function fromAngle(angle, length) {
+	if (typeof length === 'undefined') {
+		length = 1;
+	}
+	return new Vec(length * Math.cos(angle), length * Math.sin(angle), 0);
 };
 
 /**
@@ -423,19 +422,15 @@ Vec.fromAngle = function fromAngle (angle, length) {
  * @api public
  */
 Vec.fromAngles = function (theta, phi, length) {
-  if (typeof length === 'undefined') {
-    length = 1;
-  }
-  const cosPhi = Math.cos(phi);
-  const sinPhi = Math.sin(phi);
-  const cosTheta = Math.cos(theta);
-  const sinTheta = Math.sin(theta);
+	if (typeof length === 'undefined') {
+		length = 1;
+	}
+	const cosPhi = Math.cos(phi);
+	const sinPhi = Math.sin(phi);
+	const cosTheta = Math.cos(theta);
+	const sinTheta = Math.sin(theta);
 
-  return new Vec(
-      length * sinTheta * sinPhi,
-      -length * cosTheta,
-      length * sinTheta * cosPhi,
-  );
+	return new Vec(length * sinTheta * sinPhi, -length * cosTheta, length * sinTheta * cosPhi);
 };
 
 /**
@@ -450,8 +445,8 @@ Vec.fromAngles = function (theta, phi, length) {
  * @return {Vec} `this` for chaining capabilities
  * @api public
  */
-Vec.random2D = function random2D () {
-  return Vec.fromAngle(Math.random() * twoPi);
+Vec.random2D = function random2D() {
+	return Vec.fromAngle(Math.random() * twoPi);
 };
 
 /**
@@ -466,13 +461,13 @@ Vec.random2D = function random2D () {
  * @return {Vec} New Vec instance
  * @api public
  */
-Vec.random3D = function random3D () {
-  const angle = Math.random() * twoPi;
-  const vz = Math.random() * 2 - 1;
-  const vzBase = Math.sqrt(1 - vz * vz);
-  const vx = vzBase * Math.cos(angle);
-  const vy = vzBase * Math.sin(angle);
-  return new Vec(vx, vy, vz);
+Vec.random3D = function random3D() {
+	const angle = Math.random() * twoPi;
+	const vz = Math.random() * 2 - 1;
+	const vzBase = Math.sqrt(1 - vz * vz);
+	const vx = vzBase * Math.cos(angle);
+	const vy = vzBase * Math.sin(angle);
+	return new Vec(vx, vy, vz);
 };
 
 /**
@@ -489,7 +484,7 @@ Vec.random3D = function random3D () {
  * @api public
  */
 Vec.prototype.negative = function () {
-  return new Vec(-this.x, -this.y, -this.z);
+	return new Vec(-this.x, -this.y, -this.z);
 };
 
 /**
@@ -505,7 +500,7 @@ Vec.prototype.negative = function () {
  * @api public
  */
 Vec.prototype.length = function () {
-  return Math.sqrt(this.lengthSq());
+	return Math.sqrt(this.lengthSq());
 };
 Vec.prototype.magnitude = Vec.prototype.length;
 
@@ -524,7 +519,7 @@ Vec.prototype.magnitude = Vec.prototype.length;
  * @api public
  */
 Vec.prototype.distance = function (v) {
-  return this.sub(v).magnitude();
+	return this.sub(v).magnitude();
 };
 
 /**
@@ -540,10 +535,10 @@ Vec.prototype.distance = function (v) {
  * @api public
  */
 Vec.prototype.lengthSq = function () {
-  const x = this.x;
-  const y = this.y;
-  const z = this.z;
-  return x * x + y * y + z * z;
+	const x = this.x;
+	const y = this.y;
+	const z = this.z;
+	return x * x + y * y + z * z;
 };
 Vec.prototype.magnitudeSq = Vec.prototype.lengthSq;
 Vec.prototype.magsq = Vec.prototype.lengthSq;
@@ -562,12 +557,12 @@ Vec.prototype.magsq = Vec.prototype.lengthSq;
  * @api public
  */
 Vec.prototype.normalize = function () {
-  const length = this.length();
+	const length = this.length();
 
-  if (length !== 0) {
-    this.divide(length);
-  }
-  return this;
+	if (length !== 0) {
+		this.divide(length);
+	}
+	return this;
 };
 
 /**
@@ -585,7 +580,7 @@ Vec.prototype.normalize = function () {
  * @api public
  */
 Vec.prototype.setMag = function (n) {
-  return this.normalize().multiply(n);
+	return this.normalize().multiply(n);
 };
 
 /**
@@ -604,11 +599,11 @@ Vec.prototype.setMag = function (n) {
  * @api public
  */
 Vec.prototype.dot = function (x, y, z) {
-  if (x instanceof Vec) {
-    return this.x * v.x + this.y * v.y + this.z * v.z;
-  }
+	if (x instanceof Vec) {
+		return this.x * x.x + this.y * x.y + this.z * x.z;
+	}
 
-  return this.x * (x || 0) + this.y * (y || 0) + this.z * (z || 0);
+	return this.x * (x || 0) + this.y * (y || 0) + this.z * (z || 0);
 };
 
 /**
@@ -626,7 +621,7 @@ Vec.prototype.dot = function (x, y, z) {
  * @api public
  */
 Vec.prototype.cross = function (v) {
-  return this.x * v.x - this.y * v.y - this.z * v.z;
+	return this.x * v.x - this.y * v.y - this.z * v.z;
 };
 
 /**
@@ -644,11 +639,7 @@ Vec.prototype.cross = function (v) {
  * @api public
  */
 Vec.prototype.max = function (v) {
-  return new Vec(
-      Math.max(this.x, v.x),
-      Math.max(this.y, v.y),
-      Math.max(this.z, v.z),
-  );
+	return new Vec(Math.max(this.x, v.x), Math.max(this.y, v.y), Math.max(this.z, v.z));
 };
 
 /**
@@ -666,11 +657,7 @@ Vec.prototype.max = function (v) {
  * @api public
  */
 Vec.prototype.min = function (v) {
-  return new Vec(
-      Math.min(this.x, v.x),
-      Math.min(this.y, v.y),
-      Math.min(this.z, v.z),
-  );
+	return new Vec(Math.min(this.x, v.x), Math.min(this.y, v.y), Math.min(this.z, v.z));
 };
 
 /**
@@ -686,7 +673,7 @@ Vec.prototype.min = function (v) {
  * @api public
  */
 Vec.prototype.round = function () {
-  return new Vec(Math.round(this.x), Math.round(this.y), Math.round(this.z));
+	return new Vec(Math.round(this.x), Math.round(this.y), Math.round(this.z));
 };
 
 /**
@@ -705,9 +692,9 @@ Vec.prototype.round = function () {
  * @api public
  */
 Vec.prototype.lerp = function (v, t) {
-  // a * (1-t) + b*t)
-  const i = v.multiply(t);
-  return this.multiply(1 - t).add(i);
+	// a * (1-t) + b*t)
+	const i = v.multiply(t);
+	return this.multiply(1 - t).add(i);
 };
 
 /**
@@ -726,7 +713,7 @@ Vec.prototype.lerp = function (v, t) {
  * @api public
  */
 Vec.prototype.set = function (x, y, z) {
-  return new Vec(x ? x : this.x, y ? y : this.y, z ? z : this.z);
+	return new Vec(x ? x : this.x, y ? y : this.y, z ? z : this.z);
 };
 
 /**
@@ -744,15 +731,15 @@ Vec.prototype.set = function (x, y, z) {
  * @api public
  */
 Vec.prototype.clamp = function (min, max) {
-  const length = this.length();
+	const length = this.length();
 
-  if (length > max) {
-    return this.setMag(max);
-  } else if (length < min) {
-    return this.setMag(min);
-  } else {
-    return this;
-  }
+	if (length > max) {
+		return this.setMag(max);
+	} else if (length < min) {
+		return this.setMag(min);
+	} else {
+		return this;
+	}
 };
 
 /*
@@ -773,9 +760,9 @@ transform vector
  * @api public
  */
 Vec.prototype.rotateTo2D = function (rad) {
-  this.x = this.x * Math.cos(rad) - this.y * Math.sin(rad);
-  this.y = this.x * Math.sin(rad) + this.y * Math.cos(rad);
-  return this;
+	this.x = this.x * Math.cos(rad) - this.y * Math.sin(rad);
+	this.y = this.x * Math.sin(rad) + this.y * Math.cos(rad);
+	return this;
 };
 
 /**
@@ -792,8 +779,8 @@ Vec.prototype.rotateTo2D = function (rad) {
  * @api public
  */
 Vec.prototype.rotate2D = function (rad) {
-  const a = Math.atan2(this.x, this.y);
-  return this.rotateTo2D(rad + a);
+	const a = Math.atan2(this.x, this.y);
+	return this.rotateTo2D(rad + a);
 };
 
 /*
@@ -814,7 +801,7 @@ Vec.prototype.rotate2D = function (rad) {
  * @api public
  */
 Vec.prototype.equals = function (v) {
-  return this.x == v.x && this.y == v.y && this.z == this.z;
+	return this.x == v.x && this.y == v.y && this.z == this.z;
 };
 
 /**
@@ -831,7 +818,7 @@ Vec.prototype.equals = function (v) {
  * @api public
  */
 Vec.prototype.notEqual = function (v) {
-  return !this.equals(v);
+	return !this.equals(v);
 };
 
 /*
@@ -841,4 +828,5 @@ Helpers
 const _pi = Math.PI;
 const twoPi = _pi * 2;
 
-// module.exports = Vec;
+module.exports = Vec;
+// export default Vec;

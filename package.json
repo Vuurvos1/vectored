@@ -1,40 +1,35 @@
 {
-  "name": "vectored",
-  "version": "0.4.2",
-  "description": "A JavaScript 2 and 3D vector math library",
-  "main": "index.js",
-  "scripts": {
-    "lint": "eslint --fix --ext .js .",
-    "uglify": "minify index.js --out-file build/vec.min.js",
-    "browserfy": "browserify index.js --standalone Vec > build/vec.js",
-    "build": "npm run lint && npm run browserfy && minify build/vec.js --out-file build/vec.min.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/Vuurvos1/vectored.git"
-  },
-  "keywords": [
-    "vector",
-    "2d",
-    "3d",
-    "math"
-  ],
-  "author": "Sam de Kanter",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Vuurvos1/vectored/issues"
-  },
-  "homepage": "https://github.com/Vuurvos1/vectored#readme",
-  "devDependencies": {
-    "babel-minify": "^0.5.1",
-    "browserify": "^17.0.0",
-    "eslint": "^7.26.0",
-    "eslint-config-google": "^0.14.0",
-    "eslint-config-node": "^4.1.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^3.1.4",
-    "prettier": "^2.3.0",
-    "uglify-js": "^3.10.1"
-  }
+	"name": "vectored",
+	"version": "1.0.0",
+	"description": "A JavaScript 2 and 3D vector math library",
+	"main": "index.js",
+	"scripts": {
+		"lint": "eslint --fix --ext .js .",
+		"build": "node build.js",
+		"test": "jest"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/Vuurvos1/vectored.git"
+	},
+	"keywords": [
+		"vector",
+		"2d",
+		"3d",
+		"math"
+	],
+	"author": "Sam de Kanter",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/Vuurvos1/vectored/issues"
+	},
+	"homepage": "https://github.com/Vuurvos1/vectored#readme",
+	"type": "module",
+	"devDependencies": {
+		"esbuild": "^0.15.7",
+		"eslint": "^7.32.0",
+		"eslint-config-prettier": "^6.15.0",
+		"jest": "^29.0.2",
+		"prettier": "^2.7.1"
+	}
 }
