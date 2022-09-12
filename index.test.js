@@ -132,7 +132,7 @@ describe('regular methods', () => {
 		});
 	});
 
-	// distance, x y z
+	// distance, TODO x y z
 	describe('get length between 2 vectors', () => {
 		let vec1 = new Vec(0, 0, 0);
 		let vec2 = new Vec(3, 4, 0);
