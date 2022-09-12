@@ -24,7 +24,6 @@
 		"url": "https://github.com/Vuurvos1/vectored/issues"
 	},
 	"homepage": "https://github.com/Vuurvos1/vectored#readme",
-	"type": "module",
 	"devDependencies": {
 		"esbuild": "^0.15.7",
 		"eslint": "^7.32.0",

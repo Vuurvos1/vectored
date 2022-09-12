@@ -89,16 +89,106 @@ describe('chainable methods', () => {
 	// rotate by
 	// rotate by deg
 	// project onto
+
+	// cross product
+	describe('get cross product of 2 vectors', () => {
+		let vec1 = new Vec(10, 20, 5);
+		let vec2 = new Vec(5, 15, 10);
+		let cross = vec1.cross(vec2);
+
+		it('should return cross product of 2 vectors', () => {
+			expect(cross.x).toStrictEqual(125);
+			expect(cross.y).toStrictEqual(-75);
+			expect(cross.z).toStrictEqual(50);
+		});
+	});
 });
 
 // regular
 describe('regular methods', () => {
-	// clone
-	// dot
+	describe('clone a vector instance', () => {
+		let vec = new Vec(10, 20);
+		let clone = vec.clone();
+
+		it('should return a clone of a vector', () => {
+			expect(vec).toBeInstanceOf(Vec);
+			expect(vec === clone).toStrictEqual(false);
+		});
+
+		it('should have the same values as the original', () => {
+			expect(vec.x).toStrictEqual(clone.x);
+			expect(vec.y).toStrictEqual(clone.y);
+			expect(vec.z).toStrictEqual(clone.z);
+		});
+	});
+
+	describe('get dot product of 2 vectors', () => {
+		let vec1 = new Vec(10, 20, 5);
+		let vec2 = new Vec(5, 15, 10);
+		let dot = vec1.dot(vec2);
+
+		it('should return the dot procut of 2 vectors', () => {
+			expect(dot).toStrictEqual(400);
+		});
+	});
+
 	// distance, x y z
-	// length
-	// iszero
-	// is equal to
+	describe('get length between 2 vectors', () => {
+		let vec1 = new Vec(0, 0, 0);
+		let vec2 = new Vec(3, 4, 0);
+		let dist = vec1.distance(vec2);
+
+		it('should return euclidean distance between 2 vectors', () => {
+			expect(dist).toStrictEqual(5);
+		});
+	});
+
+	describe('get lenght of vector', () => {
+		let vec = Vec(3, 4);
+		let len = vec.length();
+
+		it('should return lenght of the vector', () => {
+			expect(len).toStrictEqual(5);
+		});
+	});
+
+	describe('get squared length of vector', () => {
+		let vec = Vec(3, 4);
+		let len = vec.lengthSq();
+
+		it('should return squared lenght of vector', () => {
+			expect(len).toStrictEqual(25);
+		});
+	});
+
+	describe('if vectors are equal', () => {
+		let vec1 = new Vec(10, 20, 5);
+		let vec2 = new Vec(10, 20, 5);
+		let vec3 = new Vec(30, 10, 15);
+
+		it('should be true if vectors have the same values', () => {
+			expect(vec1.equals(vec2)).toStrictEqual(true);
+		});
+
+		it('should be false if vectors do not have the same values ', () => {
+			expect(vec1.equals(vec3)).toStrictEqual(false);
+		});
+	});
+
+	// not equals
+	describe('if vectors are not equal', () => {
+		let vec1 = new Vec(10, 20, 5);
+		let vec2 = new Vec(10, 20, 5);
+		let vec3 = new Vec(30, 10, 15);
+
+		it('should be false if vectors have the same values', () => {
+			expect(vec1.notEqual(vec2)).toStrictEqual(false);
+		});
+
+		it('should be true if vectors do not have the same values ', () => {
+			expect(vec1.notEqual(vec3)).toStrictEqual(true);
+		});
+	});
 });
 
 // utility

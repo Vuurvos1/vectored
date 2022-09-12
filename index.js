@@ -610,18 +610,22 @@ Vec.prototype.dot = function (x, y, z) {
  * Calculates the cross product of the vector and another
  *
  * @example
- *     let vec1 = new Vec(100, 50);
- *     let vec2 = new Vec(200, 60);
+ *     let vec1 = new Vec(10, 20, 5);
+ *     let vec2 = new Vec(5, 15, 10);
  *
- *     vec1.dot(vec2);
- *     // => 17000
+ *     vec1.cross(vec2);
+ *     // => {x: 125, y: -75, z:50}
  *
  * @param {Vector} v The second vector
  * @return {Number} Cross product
  * @api public
  */
 Vec.prototype.cross = function (v) {
-	return this.x * v.x - this.y * v.y - this.z * v.z;
+	return new Vec(
+		this.y * v.z - this.z * v.y,
+		this.z * v.x - this.x * v.z,
+		this.x * v.y - this.y * v.x
+	);
 };
 
 /**
@@ -742,6 +746,21 @@ Vec.prototype.clamp = function (min, max) {
 	}
 };
 
+/**
+ * Clone a vector
+ *
+ * @example
+ *     let vec1 = new Vec(2, 4);
+ *     let vec2 = vec1.clone
+ *     // => {x: 2, y: 4, z: 0}
+ *
+ * @return {Vector} New vector instance
+ * @api public
+ */
+Vec.prototype.clone = function () {
+	return new Vec(this.x, this.y, this.z);
+};
+
 /*
 transform vector
 */
@@ -801,7 +820,7 @@ Vec.prototype.rotate2D = function (rad) {
  * @api public
  */
 Vec.prototype.equals = function (v) {
-	return this.x == v.x && this.y == v.y && this.z == this.z;
+	return this.x == v.x && this.y == v.y && this.z == v.z;
 };
 
 /**
