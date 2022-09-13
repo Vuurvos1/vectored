@@ -386,13 +386,13 @@ Vec.prototype.remainder = function (v) {
 Vec.prototype.rem = Vec.prototype.remainder;
 
 /**
- * Create a vector from a 2D angle
+ * Create a vector from a 2D radian angle
  *
  * @example
- *     let vector = new Vec(1, 3);
+ *     let vector = new Vec().fromAngle(Math.PI / 2, 1);
  *
  *     vector.toObject();
- *     // => {x: 1.621, y: 2.524, z: 0}
+ *     // => {x: 0, y: 1, z: 0}
  *
  * @param {Number} angle desired angle in radians
  * @param {Number} length length of the new vector (defaults to 1)
@@ -407,10 +407,10 @@ Vec.fromAngle = function fromAngle(angle, length) {
 };
 
 /**
- * Create a vector from a a pair of ISO spherical angles
+ * Create a vector from a pair of ISO spherical angles
  *
  * @example
- *     let vector = new Vec(1.5, 2, 5);
+ *     let vector = new Vec().fromAngles(1.5, 2, 5);
  *
  *     vector.toObject();
  *     // => {x: 4.535, y: -0.353, z: -2.075}
@@ -847,5 +847,4 @@ Helpers
 const _pi = Math.PI;
 const twoPi = _pi * 2;
 
-module.exports = Vec;
-// export default Vec;
+export default Vec;

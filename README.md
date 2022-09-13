@@ -22,6 +22,8 @@ let vector = new Vec(4, 2, 0);
 
 Include the script inside the html
 
+<!-- adding a version to the url is HIGHLY recomended and will prevent changes to this library from breaking your app -->
+
 ```html
 <!-- Link to file directly -->
 
@@ -60,6 +62,8 @@ console.log(vec1);
 ```
 
 For all vector opperations and explenations see [the full documentations](https://github.com/Vuurvos1/vectored/blob/main/docs/documentation.md)
+
+<!-- maybe split vector 2 and vector 3 functionality into own classes (Vec2, Vec3)? -->
 
 ## Documentation
 

@@ -63,19 +63,97 @@ describe('static Vectored methods', () => {
 			expect(vec2).toHaveProperty('z', 0);
 		});
 	});
+
+	describe('vector from 2D angle', () => {
+		let vec = new Vec.fromAngle(Math.PI / 2, 1);
+
+		it('should have a length of 1', () => {
+			expect(vec.length()).toStrictEqual(1);
+		});
+
+		it('should point right', () => {
+			expect(vec.x === 0 || vec.x < 1e-10).toStrictEqual(true); // float presission
+			expect(vec.y).toStrictEqual(1);
+			expect(vec.z).toStrictEqual(0);
+		});
+	});
+
+	// vector from iso coords
 });
 
 // chanable
 describe('chainable methods', () => {
 	// add, x y z
+	// make basic math functions take 1 - 3 params, ?num ?num ?num, vec
+	describe('add 2 vectors to eachother', () => {
+		let vec1 = new Vec(2, 5, 2);
+		let vec2 = new Vec(1, 3, 3);
+		let res = vec1.add(vec2);
+
+		it('should subract 2 vectors', () => {
+			expect(res.x).toStrictEqual(3);
+			expect(res.y).toStrictEqual(8);
+			expect(res.z).toStrictEqual(5);
+		});
+	});
+
 	// add scalar, x y z
+
 	// subtract, x y z
+	describe('subtract 2 vectors from eachother', () => {
+		let vec1 = new Vec(2, 5, 2);
+		let vec2 = new Vec(1, 3, 3);
+		let res = vec1.subtract(vec2);
+
+		it('should subract 2 vectors', () => {
+			expect(res.x).toStrictEqual(1);
+			expect(res.y).toStrictEqual(2);
+			expect(res.z).toStrictEqual(-1);
+		});
+	});
+
 	// subtract scalar, x y z
+
 	// divide, x y z
+	describe('divide 2 vectors by eachother', () => {
+		let vec1 = new Vec(2, 15, 6);
+		let vec2 = new Vec(1, 3, 2);
+		let res = vec1.divide(vec2);
+
+		it('should subract 2 vectors', () => {
+			expect(res.x).toStrictEqual(2);
+			expect(res.y).toStrictEqual(5);
+			expect(res.z).toStrictEqual(3);
+		});
+	});
+
 	// divide scalar, x y z
+
 	// multiply, x y z
+	describe('multiply 2 vectors with eachother', () => {
+		let vec1 = new Vec(2, 5, 2);
+		let vec2 = new Vec(1, 3, 3);
+		let res = vec1.multiply(vec2);
+
+		it('should subract 2 vectors', () => {
+			expect(res.x).toStrictEqual(2);
+			expect(res.y).toStrictEqual(15);
+			expect(res.z).toStrictEqual(6);
+		});
+	});
+
 	// multiply scalar, x y z
+
 	// normalize
+	describe('normalize a vectors length', () => {
+		let vec = new Vec(10, 20, 5);
+		let norm = vec.normalize();
+
+		it('should return a length of 1', () => {
+			expect(norm.length()).toStrictEqual(1);
+		});
+	});
+
 	// limit
 	// randomize, x y z
 	// unfloat
