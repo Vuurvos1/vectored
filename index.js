@@ -15,7 +15,7 @@
  * @return {Vec}
  * @api public
  */
-function Vec(x, y, z) {
+export function Vec(x, y, z) {
 	if (!(this instanceof Vec)) {
 		return new Vec(x, y, z);
 	}

@@ -63,6 +63,7 @@ console.log(vec1);
 
 For all vector opperations and explenations see [the full documentations](https://github.com/Vuurvos1/vectored/blob/main/docs/documentation.md)
 
+<!-- add typescript typing -->
 <!-- maybe split vector 2 and vector 3 functionality into own classes (Vec2, Vec3)? -->
 
 ## Documentation

@@ -1,5 +1,4 @@
-// import Vec from './index.js';
-const Vec = require('./index');
+import Vec from './index.js';
 
 // static
 describe('static Vectored methods', () => {
