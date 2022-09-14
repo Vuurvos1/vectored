@@ -71,19 +71,51 @@ describe('static Vectored methods', () => {
 		});
 
 		it('should point right', () => {
-			expect(vec.x === 0 || vec.x < 1e-10).toStrictEqual(true); // float presission
+			expect(vec.x >= 0 && vec.x < 1e-10).toStrictEqual(true); // float presission
 			expect(vec.y).toStrictEqual(1);
 			expect(vec.z).toStrictEqual(0);
 		});
 	});
 
-	// vector from iso coords
+	describe('create vector from iso coordinates', () => {
+		it('should point up', () => {
+			let vec = new Vec.fromAngles(Math.PI, 0, 5);
+
+			expect(vec.length()).toStrictEqual(5);
+			expect(vec.x).toStrictEqual(0);
+			expect(vec.y).toStrictEqual(5);
+			expect(vec.z >= 0 && vec.z < 1e-10).toStrictEqual(true);
+		});
+
+		it('should point down', () => {
+			let vec = new Vec.fromAngles(0, Math.PI, 5);
+
+			expect(vec.length()).toStrictEqual(5);
+			expect(vec.x).toStrictEqual(0);
+			expect(vec.y).toStrictEqual(-5);
+			expect(vec.z).toStrictEqual(0);
+		});
+
+		it('should have a length of 5', () => {
+			let vec = new Vec.fromAngles(Math.PI / 2, Math.PI / 4, 5);
+
+			expect(vec.length()).toStrictEqual(5);
+		});
+
+		it('should have a length of 1', () => {
+			let vec = new Vec.fromAngles(0, 0);
+
+			expect(vec.length()).toStrictEqual(1);
+			expect(vec.x).toStrictEqual(0);
+			expect(vec.y).toStrictEqual(-1);
+			expect(vec.z).toStrictEqual(0);
+		});
+	});
 });
 
 // chanable
 describe('chainable methods', () => {
-	// add, x y z
-	// make basic math functions take 1 - 3 params, ?num ?num ?num, vec
+	// add
 	describe('add 2 vectors to eachother', () => {
 		let vec1 = new Vec(2, 5, 2);
 		let vec2 = new Vec(1, 3, 3);
@@ -96,9 +128,7 @@ describe('chainable methods', () => {
 		});
 	});
 
-	// add scalar, x y z
-
-	// subtract, x y z
+	// subtract
 	describe('subtract 2 vectors from eachother', () => {
 		let vec1 = new Vec(2, 5, 2);
 		let vec2 = new Vec(1, 3, 3);
@@ -111,9 +141,7 @@ describe('chainable methods', () => {
 		});
 	});
 
-	// subtract scalar, x y z
-
-	// divide, x y z
+	// divide
 	describe('divide 2 vectors by eachother', () => {
 		let vec1 = new Vec(2, 15, 6);
 		let vec2 = new Vec(1, 3, 2);
@@ -126,9 +154,7 @@ describe('chainable methods', () => {
 		});
 	});
 
-	// divide scalar, x y z
-
-	// multiply, x y z
+	// multiply
 	describe('multiply 2 vectors with eachother', () => {
 		let vec1 = new Vec(2, 5, 2);
 		let vec2 = new Vec(1, 3, 3);
@@ -140,8 +166,6 @@ describe('chainable methods', () => {
 			expect(res.z).toStrictEqual(6);
 		});
 	});
-
-	// multiply scalar, x y z
 
 	// normalize
 	describe('normalize a vectors length', () => {

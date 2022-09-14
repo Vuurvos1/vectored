@@ -6,7 +6,7 @@
  * Constructor. Will also work without the `new` keyword
  *
  * @example
- *     let vec1 = new vec(100, 50);
+ *     let vec1 = new vec(10, 20, 5);
  *     let vec2 = vec(42, 1337);
  *
  * @param {Number} x Value of the x axis
@@ -30,8 +30,6 @@ export function Vec(x, y, z) {
  *
  * @example
  *     let vector = new Vec.up();
- *
- *     vector.toObject();
  *     // => { x: 0, y: 1, z: 0 }
  *
  * @return {Vec} New Vec instance
@@ -46,8 +44,6 @@ Vec.up = function () {
  *
  * @example
  *     let vector = new Vec.left();
- *
- *     vector.toObject();
  *     // => { x: -1, y: 0, z: 0 }
  *
  * @return {Vec} New Vec instance
@@ -62,8 +58,6 @@ Vec.left = function () {
  *
  * @example
  *     let vector = new Vec.down();
- *
- *     vector.toObject();
  *     // => { x: 0, y: -1, z: 0 }
  *
  * @return {Vec} New Vec instance
@@ -78,8 +72,6 @@ Vec.down = function () {
  *
  * @example
  *     let vector = new Vec.right();
- *
- *     vector.toObject();
  *     // => { x: 1, y: 0, z: 0 }
  *
  * @return {Vec} New Vec instance
@@ -110,8 +102,6 @@ Vec.forward = function () {
  *
  * @example
  *     let vector = new Vec.back();
- *
- *     vector.toObject();
  *     // => { x: 0, y: 0, z: -1 }
  *
  * @return {Vec} New Vec instance
@@ -126,8 +116,6 @@ Vec.back = function () {
  *
  * @example
  *     let vector = new Vec.one();
- *
- *     vector.toObject();
  *     // => { x: 1, y: 1, z: 1 }
  *
  * @return {Vec} New Vec instance
@@ -141,9 +129,7 @@ Vec.one = function () {
  * Returns a vector containing all zeros
  *
  * @example
- *     let vector = new Vec.up();
- *
- *     vector.toObject();
+ *     let vector = new Vec.zero();
  *     // => { x: 0, y: 0, z: 0 }
  *
  * @return {Vec} New Vec instance
@@ -163,8 +149,6 @@ Create vector
  * @example
  *     let array = [10, 20, 0]
  *     let vector = new Vec.fromArray(array);
- *
- *     vector.toObject();
  *     // => { x: 10, y: 20, z: 0 }
  *
  * @name Vec.fromArray
@@ -181,8 +165,6 @@ Vec.fromArray = function (arr) {
  *
  * @example
  *     let vector = new Vec({x: 10, y: 20, z:3});
- *
- *     vector.toObject();
  *     // => { x: 10, y: 20, z: 3 }
  *
  * @name Vec.formObject
@@ -232,8 +214,8 @@ Vec.prototype.toArray = function () {
  * @example
  *     let vector = new Vec(10, 20);
  *
- *     vector.toObject();
- *     // => '(10, 20, 0)'
+ *     vector.toString();
+ *     // => 'x:10 y:20 z:0'
  *
  * @return {String} String representing the vector
  * @api public
@@ -247,10 +229,9 @@ Vec.prototype.toString = function () {
  *
  * @example
  *     let vec1 = new Vec(10, 20);
- *     let vec2 = vec.copy();
  *
- *     console.log(vec2);
- *     // => '(10, 20, 0)'
+ *     let vec2 = vec.copy();
+ *		 // => {x: 10, y: 20, z: 0}
  *
  * @return {String} String representing the vector
  * @api public
@@ -271,18 +252,23 @@ Basic Math
  *  let vec2 = new Vec(8, 3, 3);
  *
  *  vec1.add(vec2);
- *  vec1.toObject();
  *  // => {x: 9, y: 8, z: 5}
  *
- * @param {v} v The other vector you want to add to this one
+ * @param {Vec | number} x Vector or scalar to add to the vector
+ * @param {number} [y] The y component of the vector to be added
+ * @param {number} [z] The z component of the vector to be added
+ *
  * @return {Vec} New Vec instance
  * @api public
+ * @chainable
  */
-Vec.prototype.add = function (v) {
-	if (v instanceof Vec) {
-		return new Vec((this.x += v.x), (this.y += v.y), (this.z += v.z));
+Vec.prototype.add = function (x, y, z) {
+	if (x instanceof Vec) {
+		return new Vec((this.x += x.x), (this.y += x.y), (this.z += x.z));
+	} else if (arguments.length === 1 && typeof x === 'number') {
+		return new Vec((this.x += x), (this.y += x), (this.z += x));
 	} else {
-		return new Vec((this.x += v), (this.y += v), (this.z += v));
+		return new Vec((this.x += x || 0), (this.y += y || 0), (this.z += z || 0));
 	}
 };
 
@@ -294,18 +280,23 @@ Vec.prototype.add = function (v) {
  *     let vec2 = new Vec(1, 3, 2);
  *
  *     vec1.subtract(vec2);
- *     vec1.toObject();
  *     // => {x: 1, y: 2, z: 1}
  *
- * @param {v} v The other vector you want to subtract to this one
+ * @param {Vec | number} x Vector or scalar to subtract from vector
+ * @param {number} [y] The y component of the vector to be subtracted
+ * @param {number} [z] The z component of the vector to be subtracted
+ *
  * @return {Vec} `this` for chaining capabilities
  * @api public
+ * @chainable
  */
-Vec.prototype.subtract = function (v) {
-	if (v instanceof Vec) {
-		return new Vec((this.x -= v.x), (this.y -= v.y), (this.z -= v.z));
+Vec.prototype.subtract = function (x, y, z) {
+	if (x instanceof Vec) {
+		return new Vec((this.x -= x.x), (this.y -= x.y), (this.z -= x.z));
+	} else if (arguments.length === 1 && typeof x === 'number') {
+		return new Vec((this.x -= x), (this.y -= x), (this.z -= x));
 	} else {
-		return new Vec((this.x -= v), (this.y -= v), (this.z -= v));
+		return new Vec((this.x -= x || 0), (this.y -= y || 0), (this.z -= z || 0));
 	}
 };
 // sub short for subract
@@ -319,18 +310,23 @@ Vec.prototype.sub = Vec.prototype.subtract;
  *     let vec2 = new Vec(4, 2, 3);
  *
  *     vec1.multiply(vec2);
- *     vec1.toObject();
  *     // => {x: 8, y: 16, z: 3}
  *
- * @param {v} v The other vector you want to multiply by
+ * @param {Vec | number} x Vector or scalar to multiply the vector by
+ * @param {number} [y] The y component of the vector to be multiplied with
+ * @param {number} [z] The z component of the vector to be multiplied with
+ *
  * @return {Vec} New Vec instance
  * @api public
+ * @chainable
  */
-Vec.prototype.multiply = function (v) {
-	if (v instanceof Vec) {
-		return new Vec((this.x *= v.x), (this.y *= v.y), (this.z *= v.z));
+Vec.prototype.multiply = function (x, y, z) {
+	if (x instanceof Vec) {
+		return new Vec((this.x *= x.x), (this.y *= x.y), (this.z *= x.z));
+	} else if (arguments.length === 1 && typeof x === 'number') {
+		return new Vec((this.x *= x), (this.y *= x), (this.z *= x));
 	} else {
-		return new Vec((this.x *= v), (this.y *= v), (this.z *= v));
+		return new Vec((this.x *= x || 1), (this.y *= y || 1), (this.z *= z || 1));
 	}
 };
 // mult shorthand for multiply
@@ -344,18 +340,23 @@ Vec.prototype.mult = Vec.prototype.multiply;
  *     let vec2 = new Vec(2, 5, 3);
  *
  *     vec1.divide(vec2);
- *     vec1.toObject();
  *     // => {x: 2.5, y: 2, z: 3}
  *
- * @param {v} v The other vector you want to divide by
+ * @param {Vec | number} x Vector or scalar to divide vector by
+ * @param {number} [y] The y component of the vector to be divided by
+ * @param {number} [z] The z component of the vector to be divided by
+ *
  * @return {Vec} New Vec instance
  * @api public
+ * @chainable
  */
-Vec.prototype.divide = function (v) {
-	if (v instanceof Vec) {
-		return new Vec((this.x /= v.x), (this.y /= v.y), (this.z /= v.z));
+Vec.prototype.divide = function (x, y, z) {
+	if (x instanceof Vec) {
+		return new Vec((this.x /= x.x), (this.y /= x.y), (this.z /= x.z));
+	} else if (arguments.length === 1 && typeof x === 'number') {
+		return new Vec((this.x /= x), (this.y /= x), (this.z /= x));
 	} else {
-		return new Vec((this.x /= v), (this.y /= v), (this.z /= v));
+		return new Vec((this.x /= x || 1), (this.y /= y || 1), (this.z /= z || 1));
 	}
 };
 // div shorthand for divide
@@ -390,8 +391,6 @@ Vec.prototype.rem = Vec.prototype.remainder;
  *
  * @example
  *     let vector = new Vec().fromAngle(Math.PI / 2, 1);
- *
- *     vector.toObject();
  *     // => {x: 0, y: 1, z: 0}
  *
  * @param {Number} angle desired angle in radians
@@ -411,8 +410,6 @@ Vec.fromAngle = function fromAngle(angle, length) {
  *
  * @example
  *     let vector = new Vec().fromAngles(1.5, 2, 5);
- *
- *     vector.toObject();
  *     // => {x: 4.535, y: -0.353, z: -2.075}
  *
  * @param {Number} theta polar angle, in radians (zero is up)
@@ -438,8 +435,6 @@ Vec.fromAngles = function (theta, phi, length) {
  *
  * @example
  *     let vector = Vec.random2D;
- *
- *     vector.toObject();
  *     // => {x: 0.616, y: 0.787, z: 0}
  *
  * @return {Vec} `this` for chaining capabilities
@@ -454,8 +449,6 @@ Vec.random2D = function random2D() {
  *
  * @example
  *     let vector = new Vec.random3D;
- *
- *     vec1.toObject();
  *     // => {x: 0.442, y: -0.800, z: -0.405}
  *
  * @return {Vec} New Vec instance
@@ -477,7 +470,6 @@ Vec.random3D = function random3D() {
  *     let vector = new Vec(2, -1, 5);
  *
  *     vector.negative();
- *     vector.toObject();
  *     // => {x: -2, y: 1, z: -5}
  *
  * @return {Vec} `this` for chaining capabilities
@@ -550,7 +542,6 @@ Vec.prototype.magsq = Vec.prototype.lengthSq;
  *     let vector = new Vec(4, 6, 5);
  *
  *     vector.normalize();
- *     vector.toObject();
  *     // => {x: 0.455, y: 0.683, z: 0.569}
  *
  * @return {Vec} `this` for chaining capabilities
@@ -572,7 +563,6 @@ Vec.prototype.normalize = function () {
  *     let vector = new Vec(4, 6, 5);
  *
  *     vector.setMag(4);
- *     vector.toObject();
  *     // => {x: 1.823, y: 2.735, z: 2.279}
  *
  * @param {n} n The length you want the vector to be
@@ -844,7 +834,6 @@ Vec.prototype.notEqual = function (v) {
 Helpers
 */
 
-const _pi = Math.PI;
-const twoPi = _pi * 2;
+const twoPi = Math.PI * 2;
 
 export default Vec;
