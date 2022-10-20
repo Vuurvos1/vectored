@@ -254,9 +254,9 @@ Basic Math
  *  vec1.add(vec2);
  *  // => {x: 9, y: 8, z: 5}
  *
- * @param {Vec | number} x Vector or scalar to add to the vector
- * @param {number} [y] The y component of the vector to be added
- * @param {number} [z] The z component of the vector to be added
+ * @param {Vec | Number} x Vector or scalar to add to the vector
+ * @param {Number} [y] The y component of the vector to be added
+ * @param {Number} [z] The z component of the vector to be added
  *
  * @return {Vec} New Vec instance
  * @api public
@@ -282,9 +282,9 @@ Vec.prototype.add = function (x, y, z) {
  *     vec1.subtract(vec2);
  *     // => {x: 1, y: 2, z: 1}
  *
- * @param {Vec | number} x Vector or scalar to subtract from vector
- * @param {number} [y] The y component of the vector to be subtracted
- * @param {number} [z] The z component of the vector to be subtracted
+ * @param {Vec | Number} x Vector or scalar to subtract from vector
+ * @param {Number} [y] The y component of the vector to be subtracted
+ * @param {Number} [z] The z component of the vector to be subtracted
  *
  * @return {Vec} `this` for chaining capabilities
  * @api public
@@ -312,9 +312,9 @@ Vec.prototype.sub = Vec.prototype.subtract;
  *     vec1.multiply(vec2);
  *     // => {x: 8, y: 16, z: 3}
  *
- * @param {Vec | number} x Vector or scalar to multiply the vector by
- * @param {number} [y] The y component of the vector to be multiplied with
- * @param {number} [z] The z component of the vector to be multiplied with
+ * @param {Vec | Number} x Vector or scalar to multiply the vector by
+ * @param {Number} [y] The y component of the vector to be multiplied with
+ * @param {Number} [z] The z component of the vector to be multiplied with
  *
  * @return {Vec} New Vec instance
  * @api public
@@ -342,9 +342,9 @@ Vec.prototype.mult = Vec.prototype.multiply;
  *     vec1.divide(vec2);
  *     // => {x: 2.5, y: 2, z: 3}
  *
- * @param {Vec | number} x Vector or scalar to divide vector by
- * @param {number} [y] The y component of the vector to be divided by
- * @param {number} [z] The z component of the vector to be divided by
+ * @param {Vec | Number} x Vector or scalar to divide vector by
+ * @param {Number} [y] The y component of the vector to be divided by
+ * @param {Number} [z] The z component of the vector to be divided by
  *
  * @return {Vec} New Vec instance
  * @api public
@@ -680,15 +680,25 @@ Vec.prototype.round = function () {
  *     vec1.lerp(vec2, 0.5);
  *     // => {x: 2.5, y: 2.5, z: 0}
  *
- * @param {Vector} v Other vector to lerp between
- * @param {Number} t Value used to interpolate between a and b
+ * @param {Vector | Number} x Vector to lerp to or vector X component
+ * @param {Number} y Amount of interpolation or vector Y component
+ * @param {Number} [z] Vector Z component
+ * @param {Number} [t] Amount of interpolation
  * @return {Vector} Lerped vector
+ *
  * @api public
+ * @chainable
  */
-Vec.prototype.lerp = function (v, t) {
+Vec.prototype.lerp = function (x, y, z, t) {
 	// a * (1-t) + b*t)
-	const i = v.multiply(t);
-	return this.multiply(1 - t).add(i);
+	if (x instanceof Vec) {
+		return this.lerp(x.x, x.y, x.z, y);
+	}
+
+	this.x += (x - this.x) * t || 0;
+	this.y += (y - this.y) * t || 0;
+	this.z += (z - this.z) * t || 0;
+	return this;
 };
 
 /**
@@ -708,6 +718,29 @@ Vec.prototype.lerp = function (v, t) {
  */
 Vec.prototype.set = function (x, y, z) {
 	return new Vec(x ? x : this.x, y ? y : this.y, z ? z : this.z);
+};
+
+/**
+ * Limit the length of a vector
+ *
+ * @example
+ *     let vec = new Vec(10, 20, 2);
+ *
+ *     vec.limit(5);
+ *     // => {x: 2.2271771, y: 4.4543543 , z: 0.4454354}
+ *
+ * @param {Number} max Maximim length of the vector
+ * @return {Vector} limited vector
+ * @api public
+ */
+Vec.prototype.limit = function (max) {
+	const length = this.length();
+
+	if (length > max) {
+		return this.setMag(max);
+	} else {
+		return this;
+	}
 };
 
 /**

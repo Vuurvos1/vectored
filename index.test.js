@@ -178,6 +178,19 @@ describe('chainable methods', () => {
 	});
 
 	// limit
+	describe('limit the length of a vector', () => {
+		let vec1 = new Vec(10, 20, 5);
+		let vec2 = new Vec(4, 0, 3);
+
+		it('should limit the lenght of the vector', () => {
+			expect(vec1.limit(5).length()).toStrictEqual(5);
+		});
+
+		it('should keep the lenght of the vector', () => {
+			expect(vec2.limit(10).length()).toStrictEqual(5);
+		});
+	});
+
 	// randomize, x y z
 	// unfloat
 	// mix, x y z
@@ -190,6 +203,27 @@ describe('chainable methods', () => {
 	// rotate by
 	// rotate by deg
 	// project onto
+
+	// lerp
+	describe('lerp between 2 vectors', () => {
+		let vec1 = new Vec(1, 3);
+		let vec2 = new Vec(4, 2);
+		let vec3 = new Vec(1, 3);
+		let lerped1 = vec1.lerp(vec2, 0.5);
+		let lerped2 = vec3.lerp(4, 2, 0, 0.5);
+
+		it('should have lerped between 2 vectors', () => {
+			expect(lerped1.x).toStrictEqual(2.5);
+			expect(lerped1.y).toStrictEqual(2.5);
+			expect(lerped1.z).toStrictEqual(0);
+		});
+
+		it('should have lerped between 2 vectors', () => {
+			expect(lerped2.x).toStrictEqual(2.5);
+			expect(lerped2.y).toStrictEqual(2.5);
+			expect(lerped2.z).toStrictEqual(0);
+		});
+	});
 
 	// cross product
 	describe('get cross product of 2 vectors', () => {
