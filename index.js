@@ -464,22 +464,6 @@ Vec.random3D = function random3D() {
 };
 
 /**
- * Get the negative of a vector
- *
- * @example
- *     let vector = new Vec(2, -1, 5);
- *
- *     vector.negative();
- *     // => {x: -2, y: 1, z: -5}
- *
- * @return {Vec} `this` for chaining capabilities
- * @api public
- */
-Vec.prototype.negative = function () {
-	return new Vec(-this.x, -this.y, -this.z);
-};
-
-/**
  * Get the length / magnitude of a vector
  *
  * @example
