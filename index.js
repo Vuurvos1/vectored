@@ -717,7 +717,11 @@ Vec.prototype.lerp = function (x, y, z, t) {
  * @api public
  */
 Vec.prototype.set = function (x, y, z) {
-	return new Vec(x ? x : this.x, y ? y : this.y, z ? z : this.z);
+	return new Vec(
+		typeof x === 'number' ? x : this.x,
+		typeof y === 'number' ? y : this.y,
+		typeof z === 'number' ? z : this.z
+	);
 };
 
 /**

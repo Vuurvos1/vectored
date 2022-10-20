@@ -191,6 +191,25 @@ describe('chainable methods', () => {
 		});
 	});
 
+	// clamp
+	describe('clamp the lenght of a vector', () => {
+		const vec1 = new Vec(10, 0, 0);
+		const vec2 = new Vec(10, 0, 0);
+		const vec3 = new Vec(10, 0, 0);
+
+		it('should limit the lenght of the vector', () => {
+			expect(vec1.clamp(1, 5).length()).toStrictEqual(5);
+		});
+
+		it('should lengthen the lenght of the vector', () => {
+			expect(vec2.clamp(15, 20).length()).toStrictEqual(15);
+		});
+
+		it('should keep the lenght of the vector', () => {
+			expect(vec3.clamp(1, 20).length()).toStrictEqual(vec3.length());
+		});
+	});
+
 	// randomize, x y z
 	// unfloat
 	// mix, x y z
@@ -257,6 +276,17 @@ describe('regular methods', () => {
 		});
 	});
 
+	describe('set values of a vector', () => {
+		let vec = new Vec(1, 3, 2);
+		let vecSet = vec.set(4, 5, 0);
+
+		it('should have set values', () => {
+			expect(vecSet.x).toStrictEqual(4);
+			expect(vecSet.y).toStrictEqual(5);
+			expect(vecSet.z).toStrictEqual(0);
+		});
+	});
+
 	describe('get dot product of 2 vectors', () => {
 		let vec1 = new Vec(10, 20, 5);
 		let vec2 = new Vec(5, 15, 10);
@@ -264,6 +294,32 @@ describe('regular methods', () => {
 
 		it('should return the dot procut of 2 vectors', () => {
 			expect(dot).toStrictEqual(400);
+		});
+	});
+
+	// min
+	describe('get smallest components of 2 vectors', () => {
+		let vec1 = new Vec(10, 20, 5);
+		let vec2 = new Vec(5, 15, 10);
+		let min = vec1.min(vec2);
+
+		it('should return the smallest components', () => {
+			expect(min.x).toStrictEqual(5);
+			expect(min.y).toStrictEqual(15);
+			expect(min.z).toStrictEqual(5);
+		});
+	});
+
+	// max
+	describe('get largest components of 2 vectors', () => {
+		let vec1 = new Vec(10, 20, 5);
+		let vec2 = new Vec(5, 15, 10);
+		let max = vec1.max(vec2);
+
+		it('should return the largest components', () => {
+			expect(max.x).toStrictEqual(10);
+			expect(max.y).toStrictEqual(20);
+			expect(max.z).toStrictEqual(10);
 		});
 	});
 
