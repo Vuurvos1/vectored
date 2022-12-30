@@ -111,6 +111,24 @@ describe('static Vectored methods', () => {
 			expect(vec.z).toStrictEqual(0);
 		});
 	});
+
+	describe('create a 2d vector with a random angle', () => {
+		it('should have a length of one', () => {
+			for (let i = 0; i < 100; i++) {
+				let vec = new Vec.random2D();
+				expect(vec.length() >= 1 - 1e-10 && vec.length() <= 1 + 1e-10).toStrictEqual(true); // float presission			}
+				}
+		});
+	})
+
+	describe('create a 3d vector with a random angle', () => {
+		it('should have a length of one', () => {
+			for (let i = 0; i < 100; i++) {
+				let vec = new Vec.random3D();
+				expect(vec.length() >= 1 - 1e-10 && vec.length() <= 1 + 1e-10).toStrictEqual(true); // float presission			}
+				}
+		});
+	})
 });
 
 // chanable
@@ -323,8 +341,9 @@ describe('regular methods', () => {
 		});
 	});
 
-	// distance, TODO x y z
-	describe('get length between 2 vectors', () => {
+	// distance, 
+	// TODO: x y z
+	describe('get length/distance between 2 vectors', () => {
 		let vec1 = new Vec(0, 0, 0);
 		let vec2 = new Vec(3, 4, 0);
 		let dist = vec1.distance(vec2);

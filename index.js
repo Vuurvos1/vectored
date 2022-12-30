@@ -2,6 +2,95 @@
  * # Vectored - A JavaScript 2 and 3D vector math library
  */
 
+class Vector {
+	constructor(x = 0, y = 0, z = 0) {
+		this.x = x;
+		this.y = y;
+		this.z = z;
+	}
+
+	// creating a vector
+	fromArray(array, offset) {
+		this.x = array[offset] || 0;
+		this.y = array[offset + 1] || 0;
+		this.z = array[offset + 2] || 0;
+		return this;
+	}
+
+	fromObject(object) {
+		this.x = object.x || 0;
+		this.y = object.y || 0;
+		this.z = object.z || 0;
+		return this;
+	}
+
+	// vector presets
+
+	// vector something (like utils but different)
+	set(x, y, z) {
+		this.x = x;
+		this.y = y;
+		this.z = z;
+		return this;
+	}
+
+	setX(x) {
+		this.x = x;
+		return this;
+	}
+
+	setY(y) {
+		this.y = y;
+		return this;
+	}
+
+	setZ(z) {
+		this.z = z;
+		return this;
+	}
+
+	// vector math
+	add(x, y, z) {
+		// skip adding x, y and z seperate, this can easily be implemented by the user
+		// and would reduce quite a bit of library size
+		this.x += x;
+		this.y += y;
+		this.z += z;
+		return this;
+	}
+
+	addScalar(s) {
+		this.x += s;
+		this.y += s;
+		this.z += s;
+		return this;
+	}
+
+	// addScalar = add // does this work?
+	// addVectors // does same as add
+	// addScaledVector(v, s) // add vector and scale this.x += v.x * s
+
+	cross() {}
+
+	dot() {}
+
+	// vector utils
+	equals(v) {
+		return v.x === this.x && v.y === this.y && v.z === this.z;
+	}
+
+	toArray() {
+		return [this.x, this.y, this.z];
+	}
+
+	toObject() {
+		return { x: this.x, y: this.y, z: this.z };
+	}
+}
+
+export default Vector;
+export { Vector };
+
 /**
  * Constructor. Will also work without the `new` keyword
  *
@@ -431,7 +520,7 @@ Vec.fromAngles = function (theta, phi, length) {
 };
 
 /**
- * Create a new 2D vector with a random angle
+ * Create a new 2D unit vector with a random angle
  *
  * @example
  *     let vector = Vec.random2D;
@@ -857,4 +946,4 @@ Helpers
 
 const twoPi = Math.PI * 2;
 
-export default Vec;
+// export default Vec;
