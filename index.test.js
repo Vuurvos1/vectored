@@ -264,6 +264,40 @@ describe('advanced vector math functions', () => {
 
 // utils
 describe('vector utility functions', () => {
+	describe('get minimum components of 2 vectors', () => {
+		let vec1 = new Vec(5, 20, 4);
+		let vec2 = new Vec(2, 20, 12).min(vec1);
+
+		it('should have the minimum values of the 2 vectors', () => {
+			expect(vec2.x).toStrictEqual(2);
+			expect(vec2.y).toStrictEqual(20);
+			expect(vec2.z).toStrictEqual(4);
+		});
+	});
+
+	describe('get maximum components of 2 vectors', () => {
+		let vec1 = new Vec(5, 20, 4);
+		let vec2 = new Vec(2, 20, 12).max(vec1);
+
+		it('should have the maximum values of the 2 vectors', () => {
+			expect(vec2.x).toStrictEqual(5);
+			expect(vec2.y).toStrictEqual(20);
+			expect(vec2.z).toStrictEqual(12);
+		});
+	});
+
+	describe('clamp components of 2 vectors', () => {
+		let min = new Vec(0, 20, 0);
+		let max = new Vec(20, 20, 10);
+		let vec = new Vec(-5, 40, 5).clamp(min, max);
+
+		it('should have the maximum values of the 2 vectors', () => {
+			expect(vec.x).toStrictEqual(0);
+			expect(vec.y).toStrictEqual(20);
+			expect(vec.z).toStrictEqual(5);
+		});
+	});
+
 	describe('if vectors are equal', () => {
 		let vec1 = new Vec(10, 20, 5);
 		let vec2 = new Vec(10, 20, 5);
@@ -277,62 +311,13 @@ describe('vector utility functions', () => {
 			expect(vec1.equals(vec3)).toStrictEqual(false);
 		});
 	});
+
+	// to array
+
+	// to object
 });
 
-// // chanable
 // describe('chainable methods', () => {
-// 	// add
-// 	describe('add 2 vectors to eachother', () => {
-// 		let vec1 = new Vec(2, 5, 2);
-// 		let vec2 = new Vec(1, 3, 3);
-// 		let res = vec1.add(vec2);
-
-// 		it('should subract 2 vectors', () => {
-// 			expect(res.x).toStrictEqual(3);
-// 			expect(res.y).toStrictEqual(8);
-// 			expect(res.z).toStrictEqual(5);
-// 		});
-// 	});
-
-// 	// subtract
-// 	describe('subtract 2 vectors from eachother', () => {
-// 		let vec1 = new Vec(2, 5, 2);
-// 		let vec2 = new Vec(1, 3, 3);
-// 		let res = vec1.subtract(vec2);
-
-// 		it('should subract 2 vectors', () => {
-// 			expect(res.x).toStrictEqual(1);
-// 			expect(res.y).toStrictEqual(2);
-// 			expect(res.z).toStrictEqual(-1);
-// 		});
-// 	});
-
-// 	// divide
-// 	describe('divide 2 vectors by eachother', () => {
-// 		let vec1 = new Vec(2, 15, 6);
-// 		let vec2 = new Vec(1, 3, 2);
-// 		let res = vec1.divide(vec2);
-
-// 		it('should subract 2 vectors', () => {
-// 			expect(res.x).toStrictEqual(2);
-// 			expect(res.y).toStrictEqual(5);
-// 			expect(res.z).toStrictEqual(3);
-// 		});
-// 	});
-
-// 	// multiply
-// 	describe('multiply 2 vectors with eachother', () => {
-// 		let vec1 = new Vec(2, 5, 2);
-// 		let vec2 = new Vec(1, 3, 3);
-// 		let res = vec1.multiply(vec2);
-
-// 		it('should subract 2 vectors', () => {
-// 			expect(res.x).toStrictEqual(2);
-// 			expect(res.y).toStrictEqual(15);
-// 			expect(res.z).toStrictEqual(6);
-// 		});
-// 	});
-
 // 	// normalize
 // 	describe('normalize a vectors length', () => {
 // 		let vec = new Vec(10, 20, 5);

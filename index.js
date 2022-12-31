@@ -6,9 +6,9 @@
 class Vector {
 	/**
 	 * Create a new vector
-	 * @param {Number} x - x component of the vector
-	 * @param {Number} y - y component of the vector
-	 * @param {Number} z - z component of the vector
+	 * @param {number} x - x component of the vector
+	 * @param {number} y - y component of the vector
+	 * @param {number} z - z component of the vector
 	 */
 	constructor(x = 0, y = 0, z = 0) {
 		this.x = x;
@@ -19,8 +19,8 @@ class Vector {
 	// creating a vector
 	/**
 	 * Create a new vector from an array
-	 * @param {Number[]} array - Array of numbers
-	 * @param {Number} [offset=0] - Offset inot the array
+	 * @param {number[]} array - Array of numbers
+	 * @param {number} [offset=0] - Offset inot the array
 	 */
 	fromArray(array, offset = 0) {
 		this.x = array[offset] || 0;
@@ -31,10 +31,10 @@ class Vector {
 
 	/**
 	 * Create a new vector from an object
-	 * @param {Object} object - Object containing vector components
-	 * @param {Number} [object.x=0] - x component of the vector
-	 * @param {Number} [object.y=0] - y component of the vector
-	 * @param {Number} [object.z=0] - z component of the vector
+	 * @param {object} object - Object containing vector components
+	 * @param {number} [object.x=0] - x component of the vector
+	 * @param {number} [object.y=0] - y component of the vector
+	 * @param {number} [object.z=0] - z component of the vector
 	 */
 	fromObject(object) {
 		this.x = object.x || 0;
@@ -47,6 +47,12 @@ class Vector {
 	// up, down, left, right, one, zero...
 
 	// vector something (like utils but different)
+	/**
+	 * Set vector components
+	 * @param {number} x - new x component
+	 * @param {number} y - new y component
+	 * @param {number} z - new z component
+	 */
 	set(x, y, z) {
 		this.x = x;
 		this.y = y;
@@ -120,6 +126,7 @@ class Vector {
 		this.z -= s;
 		return this;
 	}
+	// subtractScalar
 
 	multiply(x, y, z) {
 		if (x instanceof Vector) {
@@ -141,7 +148,7 @@ class Vector {
 		this.z *= s;
 		return this;
 	}
-	// mult
+	// mult, multScalar
 
 	divide(x, y, z) {
 		if (x instanceof Vector) {
@@ -168,16 +175,23 @@ class Vector {
 	// vector math
 	cross() {}
 
-	// add x, y, z seperate?
+	// x, y, z seperate?
 	dot(v) {
 		return this.x * v.x + this.y * v.y + this.z * v.z;
 	}
 
-	// vector utils
+	// ## vector utils
 
-	// length
+	lengthSq() {
+		return this.x * this.x + this.y * this.y + this.z * this.z;
+	}
+	// lengthSquared
 
-	// lengthSq
+	length() {
+		return Math.sqrt(this.lengthSq());
+	}
+
+	// clampLength(min, max)
 
 	// round
 
@@ -187,22 +201,46 @@ class Vector {
 
 	// roundToZero?
 
-	// lengthSq, lengthSquared
-
 	// normalize
 
-	// clampLength(min, max)
+	min(v) {
+		this.x = Math.min(this.x, v.x);
+		this.y = Math.min(this.y, v.y);
+		this.z = Math.min(this.z, v.z);
+		return this;
+	}
+	// expand to take n input values?
 
-	// min
+	max(v) {
+		this.x = Math.max(this.x, v.x);
+		this.y = Math.max(this.y, v.y);
+		this.z = Math.max(this.z, v.z);
+		return this;
+	}
 
-	// max
+	clamp(min, max) {
+		// assume min < max
+		this.x = Math.max(min.x, Math.min(max.x, this.x));
+		this.y = Math.max(min.y, Math.min(max.y, this.y));
+		this.z = Math.max(min.z, Math.min(max.z, this.z));
+		return this;
+	}
 
-	// clamp
-
-	// clamp scalar
+	// clampScalar
 
 	// negate
+	negate() {
+		this.x = -this.x;
+		this.y = -this.y;
+		this.z = -this.z;
+		return this;
+	}
 
+	/**
+	 * Returns true if the components of the vectors strictly equal
+	 * @param {Vector} v - other vector you want to compare to
+	 * @return {boolean} if components strictly match
+	 */
 	equals(v) {
 		return v.x === this.x && v.y === this.y && v.z === this.z;
 	}
@@ -226,9 +264,9 @@ export { Vector };
  *     let vec1 = new vec(10, 20, 5);
  *     let vec2 = vec(42, 1337);
  *
- * @param {Number} x Value of the x axis
- * @param {Number} y Value of the y axis
- * @param {Number} z Value of the z axis
+ * @param {number} x Value of the x axis
+ * @param {number} y Value of the y axis
+ * @param {number} z Value of the z axis
  * @return {Vec}
  * @api public
  */
@@ -359,39 +397,6 @@ Vec.zero = function () {
 /*
 Create vector
 */
-
-/**
- * Create a vector from an array
- *
- * @example
- *     let array = [10, 20, 0]
- *     let vector = new Vec.fromArray(array);
- *     // => { x: 10, y: 20, z: 0 }
- *
- * @name Vec.fromArray
- * @param {arr} arr Array containing x, y and z if not the value will be a 0
- * @return {Vec} New Vec instance
- * @api public
- */
-Vec.fromArray = function (arr) {
-	return new Vec(arr[0] || 0, arr[1] || 0, arr[2] || 0);
-};
-
-/**
- * Turn the x, y and z components of an object into a Vector
- *
- * @example
- *     let vector = new Vec({x: 10, y: 20, z:3});
- *     // => { x: 10, y: 20, z: 3 }
- *
- * @name Vec.formObject
- * @param {obj} obj Object containing x, y and z if not the value will be a 0
- * @return {Vec} New Vec instance
- * @api public
- */
-Vec.formObject = function (obj) {
-	return new Vec(obj.x || 0, obj.y || 0, obj.z || 0);
-};
 
 /**
  * Return an object representing the vector
@@ -903,29 +908,6 @@ Vec.prototype.lerp = function (x, y, z, t) {
 };
 
 /**
- * Set vector values
- *
- * @example
- *     let vec = new Vec(1, 3, 2);
- *
- *     vec.set(4, 5, 0);
- *     // => {x: 4, y: 5, z: 0}
- *
- * @param {Number} x New x
- * @param {Number} y New y
- * @param {Number} z New z
- * @return {Vector} New vector
- * @api public
- */
-Vec.prototype.set = function (x, y, z) {
-	return new Vec(
-		typeof x === 'number' ? x : this.x,
-		typeof y === 'number' ? y : this.y,
-		typeof z === 'number' ? z : this.z
-	);
-};
-
-/**
  * Limit the length of a vector
  *
  * @example
@@ -1028,40 +1010,6 @@ Vec.prototype.rotateTo2D = function (rad) {
 Vec.prototype.rotate2D = function (rad) {
 	const a = Math.atan2(this.x, this.y);
 	return this.rotateTo2D(rad + a);
-};
-
-/**
- * Check if two vectors are equal
- *
- * @example
- *     let vec = new Vec(100, 0);
- *
- *     vec.equal(new Vec(100, 0));
- *     // => True
- *
- * @param {Vec} v Other vector you want to compare to
- * @return {Boolean} result of vector comparison
- * @api public
- */
-Vec.prototype.equals = function (v) {
-	return this.x == v.x && this.y == v.y && this.z == v.z;
-};
-
-/**
- * Check if two vectors are NOT equal
- *
- * @example
- *     let vec = new Vec(100, 0);
- *
- *     vec.equal(new Vec(100, 0));
- *     // => False
- *
- * @param {Vec} v Other vector you want to compare to
- * @return {Boolean} result of vector comparison
- * @api public
- */
-Vec.prototype.notEqual = function (v) {
-	return !this.equals(v);
 };
 
 /*
