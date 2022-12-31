@@ -1,8 +1,15 @@
 /**
- * # Vectored - A JavaScript 2 and 3D vector math library
+ * # Vectored
+ * a 2 and 3d vector math library
  */
 
 class Vector {
+	/**
+	 * Create a new vector
+	 * @param {Number} x - x component of the vector
+	 * @param {Number} y - y component of the vector
+	 * @param {Number} z - z component of the vector
+	 */
 	constructor(x = 0, y = 0, z = 0) {
 		this.x = x;
 		this.y = y;
@@ -10,13 +17,25 @@ class Vector {
 	}
 
 	// creating a vector
-	fromArray(array, offset) {
+	/**
+	 * Create a new vector from an array
+	 * @param {Number[]} array - Array of numbers
+	 * @param {Number} [offset=0] - Offset inot the array
+	 */
+	fromArray(array, offset = 0) {
 		this.x = array[offset] || 0;
 		this.y = array[offset + 1] || 0;
 		this.z = array[offset + 2] || 0;
 		return this;
 	}
 
+	/**
+	 * Create a new vector from an object
+	 * @param {Object} object - Object containing vector components
+	 * @param {Number} [object.x=0] - x component of the vector
+	 * @param {Number} [object.y=0] - y component of the vector
+	 * @param {Number} [object.z=0] - z component of the vector
+	 */
 	fromObject(object) {
 		this.x = object.x || 0;
 		this.y = object.y || 0;
@@ -25,6 +44,7 @@ class Vector {
 	}
 
 	// vector presets
+	// up, down, left, right, one, zero...
 
 	// vector something (like utils but different)
 	set(x, y, z) {
@@ -49,13 +69,21 @@ class Vector {
 		return this;
 	}
 
-	// vector math
+	// basic vector math
+
+	// skip adding x, y and z seperate, this can easily be implemented by the user
+	// and would reduce quite a bit of library size
 	add(x, y, z) {
-		// skip adding x, y and z seperate, this can easily be implemented by the user
-		// and would reduce quite a bit of library size
-		this.x += x;
-		this.y += y;
-		this.z += z;
+		if (x instanceof Vector) {
+			this.x += x.x;
+			this.y += x.y;
+			this.z += x.z;
+			return this;
+		}
+
+		this.x += x || 0;
+		this.y += y || 0;
+		this.z += z || 0;
 		return this;
 	}
 
@@ -65,16 +93,116 @@ class Vector {
 		this.z += s;
 		return this;
 	}
-
-	// addScalar = add // does this work?
-	// addVectors // does same as add
+	// addVector = add // doesn't work addVector(v) {return this.add(v)}
 	// addScaledVector(v, s) // add vector and scale this.x += v.x * s
 
+	sub(x, y, z) {
+		if (x instanceof Vector) {
+			this.x -= x.x;
+			this.y -= x.y;
+			this.z -= x.z;
+			return this;
+		}
+
+		this.x -= x || 0;
+		this.y -= y || 0;
+		this.z -= z || 0;
+		return this;
+	}
+
+	subtract(x, y, z) {
+		return this.sub(x, y, z);
+	}
+
+	subScalar(s) {
+		this.x -= s;
+		this.y -= s;
+		this.z -= s;
+		return this;
+	}
+
+	multiply(x, y, z) {
+		if (x instanceof Vector) {
+			this.x *= x.x;
+			this.y *= x.y;
+			this.z *= x.z;
+			return this;
+		}
+
+		this.x *= x || 1;
+		this.y *= y || 1;
+		this.z *= z || 1;
+		return this;
+	}
+
+	multiplyScalar(s) {
+		this.x *= s;
+		this.y *= s;
+		this.z *= s;
+		return this;
+	}
+	// mult
+
+	divide(x, y, z) {
+		if (x instanceof Vector) {
+			this.x /= x.x;
+			this.y /= x.y;
+			this.z /= x.z;
+			return this;
+		}
+
+		this.x /= x || 1;
+		this.y /= y || 1;
+		this.z /= z || 1;
+		return this;
+	}
+
+	divideScalar(s) {
+		this.x /= s;
+		this.y /= s;
+		this.z /= s;
+		return this;
+	}
+	// div, divScalar
+
+	// vector math
 	cross() {}
 
-	dot() {}
+	// add x, y, z seperate?
+	dot(v) {
+		return this.x * v.x + this.y * v.y + this.z * v.z;
+	}
 
 	// vector utils
+
+	// length
+
+	// lengthSq
+
+	// round
+
+	// floor
+
+	// ceil
+
+	// roundToZero?
+
+	// lengthSq, lengthSquared
+
+	// normalize
+
+	// clampLength(min, max)
+
+	// min
+
+	// max
+
+	// clamp
+
+	// clamp scalar
+
+	// negate
+
 	equals(v) {
 		return v.x === this.x && v.y === this.y && v.z === this.z;
 	}
@@ -902,10 +1030,6 @@ Vec.prototype.rotate2D = function (rad) {
 	return this.rotateTo2D(rad + a);
 };
 
-/*
-  logic
-*/
-
 /**
  * Check if two vectors are equal
  *
@@ -945,5 +1069,3 @@ Helpers
 */
 
 const twoPi = Math.PI * 2;
-
-// export default Vec;
