@@ -16,7 +16,7 @@ class Vector {
 		this.z = z;
 	}
 
-	// creating a vector
+	// ## creating a vector
 	/**
 	 * Create a new vector from an array
 	 * @param {number[]} array - Array of numbers
@@ -43,7 +43,7 @@ class Vector {
 		return this;
 	}
 
-	// vector presets
+	// ### vector presets
 	// up, down, left, right, one, zero...
 
 	// vector something (like utils but different)
@@ -60,22 +60,31 @@ class Vector {
 		return this;
 	}
 
+	/**
+	 * Set x component of vector
+	 */
 	setX(x) {
 		this.x = x;
 		return this;
 	}
 
+	/**
+	 * Set y component of vector
+	 */
 	setY(y) {
 		this.y = y;
 		return this;
 	}
 
+	/**
+	 * Set z component of vector
+	 */
 	setZ(z) {
 		this.z = z;
 		return this;
 	}
 
-	// basic vector math
+	// ## basic vector math
 
 	// skip adding x, y and z seperate, this can easily be implemented by the user
 	// and would reduce quite a bit of library size
@@ -182,16 +191,26 @@ class Vector {
 
 	// ## vector utils
 
+	/**
+	 * Get the squared length of the vector
+	 * @returns {number} - squared vector lenght
+	 */
+
 	lengthSq() {
 		return this.x * this.x + this.y * this.y + this.z * this.z;
 	}
-	// lengthSquared
+	// lengthSquared, magnitudeSquard, magSq, magnitudeSq
 
+	/**
+	 * Get the lenght of the vector
+	 * @returns {number} - vector lenght
+	 */
 	length() {
 		return Math.sqrt(this.lengthSq());
 	}
+	// magnitude
 
-	// clampLength(min, max)
+	// clampLength(min, max) (scalars)
 
 	// round
 
@@ -203,6 +222,9 @@ class Vector {
 
 	// normalize
 
+	/**
+	 * Returns a vector that is made from the smallest components of two vectors
+	 */
 	min(v) {
 		this.x = Math.min(this.x, v.x);
 		this.y = Math.min(this.y, v.y);
@@ -211,6 +233,9 @@ class Vector {
 	}
 	// expand to take n input values?
 
+	/**
+	 * Return a vector that is made from the largest components of two vectors
+	 */
 	max(v) {
 		this.x = Math.max(this.x, v.x);
 		this.y = Math.max(this.y, v.y);
@@ -245,10 +270,24 @@ class Vector {
 		return v.x === this.x && v.y === this.y && v.z === this.z;
 	}
 
+	/**
+	 * Create a copy of the current vector
+	 */
+	copy() {
+		return new Vector(this.x, this.y, this.z);
+	}
+	// TODO: maybe rename to clone
+
+	/**
+	 * Returns an array that represents the vector
+	 */
 	toArray() {
 		return [this.x, this.y, this.z];
 	}
 
+	/**
+	 * Returns an object that represents the vector
+	 */
 	toObject() {
 		return { x: this.x, y: this.y, z: this.z };
 	}
@@ -397,70 +436,6 @@ Vec.zero = function () {
 /*
 Create vector
 */
-
-/**
- * Return an object representing the vector
- *
- * @example
- *     let vector = new Vec(10, 20);
- *
- *     vector.toObject();
- *     // => { x: 10, y: 20, z: 0 }
- *
- * @return {Object} Object representing the vector
- * @api public
- */
-Vec.prototype.toObject = function () {
-	return { x: this.x, y: this.y, z: this.z };
-};
-
-/**
- * Returns an array representing the vector
- *
- * @example
- *     let vector = new Vec(10, 20);
- *
- *     vector.toArray();
- *     // => [10, 20, 0]
- *
- * @return {Array} Array representing the vector
- * @api public
- */
-Vec.prototype.toArray = function () {
-	return [this.x, this.y, this.z];
-};
-
-/**
- * Returns a string representing the vector
- *
- * @example
- *     let vector = new Vec(10, 20);
- *
- *     vector.toString();
- *     // => 'x:10 y:20 z:0'
- *
- * @return {String} String representing the vector
- * @api public
- */
-Vec.prototype.toString = function () {
-	return `x:${this.x} y:${this.y} z:${this.z}`;
-};
-
-/**
- * Returns a copy of a vector
- *
- * @example
- *     let vec1 = new Vec(10, 20);
- *
- *     let vec2 = vec.copy();
- *		 // => {x: 10, y: 20, z: 0}
- *
- * @return {String} String representing the vector
- * @api public
- */
-Vec.prototype.copy = function () {
-	return new Vec(this.x, this.y, this.z);
-};
 
 /*
 Basic Math
@@ -686,23 +661,6 @@ Vec.random3D = function random3D() {
 };
 
 /**
- * Get the length / magnitude of a vector
- *
- * @example
- *     let vector = new Vec(3, 4, 0);
- *
- *     vector.length();
- *     // => 5
- *
- * @return {Number} Length / Magnitude
- * @api public
- */
-Vec.prototype.length = function () {
-	return Math.sqrt(this.lengthSq());
-};
-Vec.prototype.magnitude = Vec.prototype.length;
-
-/**
  * Return the distance between 2 vectors if they where points
  *
  * @example
@@ -719,27 +677,6 @@ Vec.prototype.magnitude = Vec.prototype.length;
 Vec.prototype.distance = function (v) {
 	return this.sub(v).magnitude();
 };
-
-/**
- * Get the squared lenght / magnitude of a Vector
- *
- * @example
- *     let vector = new Vec(3, 4, 0);
- *
- *     vector.lengthSq();
- *     // => 25
- *
- * @return {Number} Squared lenght / magnitude of the vector
- * @api public
- */
-Vec.prototype.lengthSq = function () {
-	const x = this.x;
-	const y = this.y;
-	const z = this.z;
-	return x * x + y * y + z * z;
-};
-Vec.prototype.magnitudeSq = Vec.prototype.lengthSq;
-Vec.prototype.magsq = Vec.prototype.lengthSq;
 
 /**
  * Normalize the vector lenght to 1
@@ -800,64 +737,6 @@ Vec.prototype.dot = function (x, y, z) {
 	}
 
 	return this.x * (x || 0) + this.y * (y || 0) + this.z * (z || 0);
-};
-
-/**
- * Calculates the cross product of the vector and another
- *
- * @example
- *     let vec1 = new Vec(10, 20, 5);
- *     let vec2 = new Vec(5, 15, 10);
- *
- *     vec1.cross(vec2);
- *     // => {x: 125, y: -75, z:50}
- *
- * @param {Vector} v The second vector
- * @return {Number} Cross product
- * @api public
- */
-Vec.prototype.cross = function (v) {
-	return new Vec(
-		this.y * v.z - this.z * v.y,
-		this.z * v.x - this.x * v.z,
-		this.x * v.y - this.y * v.x
-	);
-};
-
-/**
- * Return a vector that is made from the largest components of two vectors
- *
- * @example
- *     let vec1 = new Vec(100, 50);
- *     let vec2 = new Vec(200, 60);
- *
- *     vec1.max(vec2);
- *     // => {200, 60}
- *
- * @param {Vector} v The second vector
- * @return {Vector} Maximum values of the 2 vectors
- * @api public
- */
-Vec.prototype.max = function (v) {
-	return new Vec(Math.max(this.x, v.x), Math.max(this.y, v.y), Math.max(this.z, v.z));
-};
-
-/**
- * Returns a vector that is made from the smallest components of two vectors
- *
- * @example
- *     let vec1 = new Vec(100, 50);
- *     let vec2 = new Vec(200, 60);
- *
- *     vec1.min(vec2);
- *     // => {100, 50, 0}
- *
- * @param {Vector} v The second vector
- * @return {Vector} Minimum of vector
- * @api public
- */
-Vec.prototype.min = function (v) {
-	return new Vec(Math.min(this.x, v.x), Math.min(this.y, v.y), Math.min(this.z, v.z));
 };
 
 /**
@@ -954,21 +833,6 @@ Vec.prototype.clamp = function (min, max) {
 	} else {
 		return this;
 	}
-};
-
-/**
- * Clone a vector
- *
- * @example
- *     let vec1 = new Vec(2, 4);
- *     let vec2 = vec1.clone
- *     // => {x: 2, y: 4, z: 0}
- *
- * @return {Vector} New vector instance
- * @api public
- */
-Vec.prototype.clone = function () {
-	return new Vec(this.x, this.y, this.z);
 };
 
 /*

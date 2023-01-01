@@ -298,6 +298,15 @@ describe('vector utility functions', () => {
 		});
 	});
 
+	describe('copy vector', () => {
+		let vec = new Vec(3, 14, 15);
+		let copy = vec.copy();
+
+		it('should have created a copy of the vector', () => {
+			expect(vec === copy).toStrictEqual(false);
+		});
+	});
+
 	describe('if vectors are equal', () => {
 		let vec1 = new Vec(10, 20, 5);
 		let vec2 = new Vec(10, 20, 5);
