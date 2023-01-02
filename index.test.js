@@ -67,19 +67,20 @@ describe('creating vectors', () => {
 		});
 	});
 
-	// 	describe('vector from 2D angle', () => {
-	// 		let vec = new Vec.fromAngle(Math.PI / 2, 1);
+	describe('vector from 2D angle', () => {
+		let vec = new Vec().fromAngle(Math.PI / 2, 3);
 
-	// 		it('should have a length of 1', () => {
-	// 			expect(vec.length()).toStrictEqual(1);
-	// 		});
+		it('should have a length of 1', () => {
+			expect(vec.length()).toStrictEqual(3);
+		});
 
-	// 		it('should point right', () => {
-	// 			expect(vec.x >= 0 && vec.x < 1e-10).toStrictEqual(true); // float presission
-	// 			expect(vec.y).toStrictEqual(1);
-	// 			expect(vec.z).toStrictEqual(0);
-	// 		});
-	// });
+		it('should point right', () => {
+			console.log(vec);
+			expect(vec.x >= 0 && vec.x < 1e-10).toStrictEqual(true); // float presission
+			expect(vec.y).toStrictEqual(3);
+			expect(vec.z).toStrictEqual(0);
+		});
+	});
 
 	// 	describe('create vector from iso coordinates', () => {
 	// 		it('should point up', () => {
@@ -372,7 +373,7 @@ describe('vector utility functions', () => {
 
 // 	// randomize, x y z
 // 	// unfloat
-// 	// mix, x y z
+// 	// mix
 // 	// zero
 // 	// horizontal angle
 // 	// rotate
@@ -420,21 +421,6 @@ describe('vector utility functions', () => {
 
 // // regular
 // describe('regular methods', () => {
-// 	describe('clone a vector instance', () => {
-// 		let vec = new Vec(10, 20);
-// 		let clone = vec.clone();
-
-// 		it('should return a clone of a vector', () => {
-// 			expect(vec).toBeInstanceOf(Vec);
-// 			expect(vec === clone).toStrictEqual(false);
-// 		});
-
-// 		it('should have the same values as the original', () => {
-// 			expect(vec.x).toStrictEqual(clone.x);
-// 			expect(vec.y).toStrictEqual(clone.y);
-// 			expect(vec.z).toStrictEqual(clone.z);
-// 		});
-// 	});
 
 // 	describe('set values of a vector', () => {
 // 		let vec = new Vec(1, 3, 2);
@@ -444,32 +430,6 @@ describe('vector utility functions', () => {
 // 			expect(vecSet.x).toStrictEqual(4);
 // 			expect(vecSet.y).toStrictEqual(5);
 // 			expect(vecSet.z).toStrictEqual(0);
-// 		});
-// 	});
-
-// 	// min
-// 	describe('get smallest components of 2 vectors', () => {
-// 		let vec1 = new Vec(10, 20, 5);
-// 		let vec2 = new Vec(5, 15, 10);
-// 		let min = vec1.min(vec2);
-
-// 		it('should return the smallest components', () => {
-// 			expect(min.x).toStrictEqual(5);
-// 			expect(min.y).toStrictEqual(15);
-// 			expect(min.z).toStrictEqual(5);
-// 		});
-// 	});
-
-// 	// max
-// 	describe('get largest components of 2 vectors', () => {
-// 		let vec1 = new Vec(10, 20, 5);
-// 		let vec2 = new Vec(5, 15, 10);
-// 		let max = vec1.max(vec2);
-
-// 		it('should return the largest components', () => {
-// 			expect(max.x).toStrictEqual(10);
-// 			expect(max.y).toStrictEqual(20);
-// 			expect(max.z).toStrictEqual(10);
 // 		});
 // 	});
 
