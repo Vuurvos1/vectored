@@ -2,8 +2,8 @@
 	"name": "vectored",
 	"version": "1.0.0",
 	"description": "A JavaScript 2 and 3D vector math library",
-	"main": "dist/cjs/index.js",
-	"module": "index.js",
+	"main": "dist/index.js",
+	"module": "dist/index.mjs",
 	"type": "module",
 	"scripts": {
 		"lint": "eslint --fix --ext .js .",
@@ -29,10 +29,10 @@
 	},
 	"homepage": "https://github.com/Vuurvos1/vectored#readme",
 	"devDependencies": {
-		"esbuild": "^0.16.12",
+		"esbuild": "^0.17.4",
 		"eslint": "^7.32.0",
 		"eslint-config-prettier": "^6.15.0",
-		"jest": "^29.3.1",
-		"prettier": "^2.8.1"
+		"jest": "^29.4.1",
+		"prettier": "^2.8.3"
 	}
 }

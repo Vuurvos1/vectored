@@ -362,11 +362,35 @@ class Vector {
 
 	// clampLength(min, max) (scalars)
 
-	// round
+	/**
+	 * Round components of vector
+	 */
+	round() {
+		this.x = Math.round(this.x);
+		this.y = Math.round(this.y);
+		this.z = Math.round(this.z);
+		return this;
+	}
 
-	// floor
+	/**
+	 * Floor components of vector
+	 */
+	floor() {
+		this.x = Math.floor(this.x);
+		this.y = Math.floor(this.y);
+		this.z = Math.floor(this.z);
+		return this;
+	}
 
-	// ceil
+	/**
+	 * Ceil components of vector
+	 */
+	ceil() {
+		this.x = Math.ceil(this.x);
+		this.y = Math.ceil(this.y);
+		this.z = Math.ceil(this.z);
+		return this;
+	}
 
 	// roundToZero?
 
@@ -408,7 +432,7 @@ class Vector {
 		this.z = Math.min(this.z, v.z);
 		return this;
 	}
-	// expand to take n input values?
+	// expand to take n input vectors?
 
 	/**
 	 * Return a vector that is made from the largest components of two vectors

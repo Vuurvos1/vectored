@@ -4,11 +4,11 @@ import esbuild from 'esbuild';
 esbuild
 	.build({
 		entryPoints: ['index.js'],
-		outdir: 'dist/esm',
+		outdir: 'dist',
+		outExtension: { '.js': '.mjs' },
 		bundle: true,
 		sourcemap: true,
 		minify: true,
-		splitting: true,
 		format: 'esm',
 		define: { global: 'window' },
 		target: ['es2020']
@@ -19,10 +19,11 @@ esbuild
 esbuild
 	.build({
 		entryPoints: ['index.js'],
-		outfile: 'dist/cjs/index.js',
+		outdir: 'dist',
 		bundle: true,
 		sourcemap: true,
 		minify: true,
+		format: 'cjs',
 		platform: 'node',
 		target: ['node16']
 	})
