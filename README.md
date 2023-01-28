@@ -22,17 +22,23 @@ let vector = new Vec(4, 2, 0);
 
 Include the script inside the html
 
+<!-- adding a version to the url is HIGHLY recomended and will prevent changes to this library from breaking your app -->
+
 ```html
 <!-- Link to file directly -->
+
 <script src="./vec.js"></script>
 
 <!-- or latest via url -->
-<script src="https://cdn.jsdelivr.net/npm/vectored@latest/build/vec.min.js"></script>
 
-<!-- or to a specific version-->
-<script src="https://cdn.jsdelivr.net/npm/vectored@0.4/build/vec.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vectored@latest/dist/vec.min.js"></script>
+
+<!-- or to a more specific version-->
+
+<script src="https://cdn.jsdelivr.net/npm/vectored@1.0/dist/vec.min.js"></script>
 
 <!-- you can use vec.js here -->
+
 <script src="/"></script>
 ```
 
@@ -56,6 +62,8 @@ console.log(vec1);
 ```
 
 For all vector opperations and explenations see [the full documentations](https://github.com/Vuurvos1/vectored/blob/main/docs/documentation.md)
+
+<!-- add typescript typing -->
 
 ## Documentation
 
