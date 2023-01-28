@@ -126,7 +126,7 @@ class Vector {
 	 * let vector = Vec.random2D;
 	 *  // => {x: 0.616, y: 0.787, z: 0}
 	 *
-	 * @return {Vec} `this` for chaining capabilities
+	 * @return {Vector}
 	 */
 	random2D() {
 		return this.fromAngle(Math.random() * Math.PI * 2);
@@ -134,8 +134,24 @@ class Vector {
 
 	/**
 	 * Create a new 3d unit vector with a random angle
+	 *
+	 * @example
+	 *     let vector = new Vec.random3D;
+	 *     // => {x: 0.442, y: -0.800, z: -0.405}
+	 *
+	 * @return {Vector} New vector instance
 	 */
-	random3D() {}
+	random3D() {
+		const angle = Math.random() * Math.PI * 2;
+		const vz = Math.random() * 2 - 1;
+		const vzBase = Math.sqrt(1 - vz * vz);
+		const vx = vzBase * Math.cos(angle);
+		const vy = vzBase * Math.sin(angle);
+		this.x = vx;
+		this.y = vy;
+		this.z = vz;
+		return this;
+	}
 
 	// ### vector presets
 	// up, down, left, right, one, zero...
@@ -300,8 +316,51 @@ class Vector {
 	}
 	// div, divScalar
 
+	/**
+	 * Calculate the remainder of a vector divided by another vector
+	 * @param {Vector} v
+	 * @returns {Vector} this
+	 * @example
+	 */
+	remainder(x, y, z) {
+		if (x instanceof Vector) {
+			this.x %= x.x;
+			this.y %= x.y;
+			this.z %= x.z;
+			return this;
+		}
+
+		this.x %= x || 1;
+		this.y %= y || 1;
+		this.z %= z || 1;
+		return this;
+	}
+	// rem
+
+	/**
+	 * Calculate the remainder of a vector divided by a scalar
+	 * @param {number} s
+	 * @returns {Vector} this
+	 */
+	remainderScalar(s) {
+		this.x %= s;
+		this.y %= s;
+		this.z %= s;
+		return this;
+	}
+
 	// vector math
-	cross() {}
+	/**
+	 * Calculate the cross product of two vectors
+	 * @param {Vector} v
+	 * @returns {Vector} this
+	 */
+	cross(v) {
+		this.x = this.y * v.z - this.z * v.y;
+		this.y = this.z * v.x - this.x * v.z;
+		this.z = this.x * v.y - this.y * v.x;
+		return this;
+	}
 
 	/**
 	 * Calculates the dot product of two vectors
@@ -318,6 +377,19 @@ class Vector {
 		return this.x * v.x + this.y * v.y + this.z * v.z;
 	}
 	// TODO: seperate x, y and z?
+
+	/**
+	 * Linearly interpolate between two vectors
+	 * @param {Vector} v - second vector
+	 * @param {number} t - interpolation amount
+	 * @returns {Vector} this
+	 */
+	lerp(v, t) {
+		this.x += (v.x - this.x) * t;
+		this.y += (v.y - this.y) * t;
+		this.z += (v.z - this.z) * t;
+		return this;
+	}
 
 	// ## vector utils
 
@@ -360,8 +432,6 @@ class Vector {
 		return this.subtract(v).length();
 	}
 
-	// clampLength(min, max) (scalars)
-
 	/**
 	 * Round components of vector
 	 */
@@ -392,8 +462,6 @@ class Vector {
 		return this;
 	}
 
-	// roundToZero?
-
 	/**
 	 * Normalize the vector lenght to 1
 	 *
@@ -417,7 +485,7 @@ class Vector {
 	 * // => {x: 1.823, y: 2.735, z: 2.279}
 	 *
 	 * @param {number} length - The length you want the vector to be
-	 * @return {Vector} `this` for chaining capabilities
+	 * @return {Vector} normalized vector
 	 */
 	setLength(lenght) {
 		return this.normalize().multiplyScalar(lenght);
@@ -444,6 +512,12 @@ class Vector {
 		return this;
 	}
 
+	/**
+	 * Clamp vector between a min and max vector
+	 * @param {Vector} min - minimum vector
+	 * @param {Vector} max - maximum vector
+	 * @return {Vector} clamped vector
+	 */
 	clamp(min, max) {
 		// assume min < max
 		this.x = Math.max(min.x, Math.min(max.x, this.x));
@@ -453,6 +527,19 @@ class Vector {
 	}
 
 	// clampScalar
+
+	/**
+	 * Clamp vector length between a min and max value
+	 * @param {number} min - minimum length
+	 * @param {number} max - maximum length
+	 * @return {Vector} clamped vector
+	 */
+	clampLength(min, max) {
+		const length = this.length();
+		return this.divideScalar(length || 1).multiplyScalar(Math.max(min, Math.min(max, length)));
+	}
+	// clampLength(min, max) (scalars)
+	// limit
 
 	// negate
 	negate() {
@@ -497,43 +584,9 @@ class Vector {
 export default Vector;
 export { Vector };
 
-export function Vec(x, y, z) {
-	if (!(this instanceof Vec)) {
-		return new Vec(x, y, z);
-	}
-
-	this.x = x || 0;
-	this.y = y || 0;
-	this.z = z || 0;
-}
-
 /*
 Basic Math
 */
-
-// /**
-//  * Remainder when dividing two vectors
-//  *
-//  * @example
-//  *     let vec1 = new Vec(1, 3);
-//  *     let vec2 = new Vec(4, 2);
-//  *
-//  *     vec1.remainder(vec2);
-//  *     // => {x: 1, y: 1, z: 0}
-//  *
-//  * @param {Vector} v vector to divide by
-//  * @return {Vector} Remainder of the vector
-//  * @api public
-//  */
-// Vec.prototype.remainder = function (v) {
-// 	if (v instanceof Vec) {
-// 		return new Vec((this.x %= v.x), (this.y %= v.y), (this.z %= v.z));
-// 	} else {
-// 		return new Vec((this.x %= v), (this.y %= v), (this.z %= v));
-// 	}
-// };
-// // rem shorthand for remainder
-// Vec.prototype.rem = Vec.prototype.remainder;
 
 // /**
 //  * Create a vector from a pair of ISO spherical angles
@@ -558,121 +611,6 @@ Basic Math
 // 	const sinTheta = Math.sin(theta);
 
 // 	return new Vec(length * sinTheta * sinPhi, -length * cosTheta, length * sinTheta * cosPhi);
-// };
-
-// /**
-//  * Create a new 3D vector with a random angle
-//  *
-//  * @example
-//  *     let vector = new Vec.random3D;
-//  *     // => {x: 0.442, y: -0.800, z: -0.405}
-//  *
-//  * @return {Vec} New Vec instance
-//  * @api public
-//  */
-// Vec.random3D = function random3D() {
-// 	const angle = Math.random() * twoPi;
-// 	const vz = Math.random() * 2 - 1;
-// 	const vzBase = Math.sqrt(1 - vz * vz);
-// 	const vx = vzBase * Math.cos(angle);
-// 	const vy = vzBase * Math.sin(angle);
-// 	return new Vec(vx, vy, vz);
-// };
-
-// /**
-//  * Rounds the vector so all values are integers
-//  *
-//  * @example
-//  *     let vec = new Vec(5.6, 8.362, 3);
-//  *
-//  *     vec.round();
-//  *     // => {x: 6, y: 8, z:3}
-//  *
-//  * @return {Vector} Rounded vector
-//  * @api public
-//  */
-// Vec.prototype.round = function () {
-// 	return new Vec(Math.round(this.x), Math.round(this.y), Math.round(this.z));
-// };
-
-// /**
-//  * Lerp between two vectors
-//  *
-//  * @example
-//  *     let vec1 = new Vec(1, 3);
-//  *     let vec2 = new Vec(4, 2);
-//  *
-//  *     vec1.lerp(vec2, 0.5);
-//  *     // => {x: 2.5, y: 2.5, z: 0}
-//  *
-//  * @param {Vector | Number} x Vector to lerp to or vector X component
-//  * @param {Number} y Amount of interpolation or vector Y component
-//  * @param {Number} [z] Vector Z component
-//  * @param {Number} [t] Amount of interpolation
-//  * @return {Vector} Lerped vector
-//  *
-//  * @api public
-//  * @chainable
-//  */
-// Vec.prototype.lerp = function (x, y, z, t) {
-// 	// a * (1-t) + b*t)
-// 	if (x instanceof Vec) {
-// 		return this.lerp(x.x, x.y, x.z, y);
-// 	}
-
-// 	this.x += (x - this.x) * t || 0;
-// 	this.y += (y - this.y) * t || 0;
-// 	this.z += (z - this.z) * t || 0;
-// 	return this;
-// };
-
-// /**
-//  * Limit the length of a vector
-//  *
-//  * @example
-//  *     let vec = new Vec(10, 20, 2);
-//  *
-//  *     vec.limit(5);
-//  *     // => {x: 2.2271771, y: 4.4543543 , z: 0.4454354}
-//  *
-//  * @param {Number} max Maximim length of the vector
-//  * @return {Vector} limited vector
-//  * @api public
-//  */
-// Vec.prototype.limit = function (max) {
-// 	const length = this.length();
-
-// 	if (length > max) {
-// 		return this.setMag(max);
-// 	} else {
-// 		return this;
-// 	}
-// };
-
-// /**
-//  * Clamp the length of a vector
-//  *
-//  * @example
-//  *     let vec = new Vec(2, 4);
-//  *
-//  *     vec.clamp(1, 3);
-//  *     // => {x: 4, y: 5, z: 0}
-//  *
-//  * @param {Number} min Minimum length of the vector
-//  * @param {Number} max Maximim length of the vector
-//  * @return {Vector} Clamped vector
-//  * @api public
-//  */
-// Vec.prototype.clamp = function (min, max) {
-// 	const length = this.length();
-
-// 	if (length > max) {
-// 		return this.setMag(max);
-// 	} else if (length < min) {
-// 		return this.setMag(min);
-// 	} else {
-// 		return this;
-// 	}
 // };
 
 // /*
@@ -715,5 +653,3 @@ Basic Math
 // 	const a = Math.atan2(this.x, this.y);
 // 	return this.rotateTo2D(rad + a);
 // };
-
-// const twoPi = Math.PI * 2;
